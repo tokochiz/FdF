@@ -6,7 +6,6 @@ INC_DIR = includes
 SRC_DIR = src
 SRC_FILES = main.c \
 			
-			
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 
