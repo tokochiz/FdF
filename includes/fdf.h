@@ -6,15 +6,14 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/06 20:04:59 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/20 22:40:01 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../Libft/libft.h"
+# include "../includes/get_next_line.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -38,4 +37,15 @@ typedef struct s_point
 	int shift_x;
 	int shift_y;
 	int p;
+
 }t_point;
+
+typedef struct s_map
+{
+	int width;
+	int height;
+	int **map_area;
+	int **map_color;
+}t_map;
+
+#endif
