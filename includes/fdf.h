@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/20 22:40:01 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/21 19:30:06 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,56 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-# define ERR_INVALID "Invalid number of arguments\n"
-# define ERR_FILE "file "
+# define ERR_ARGS "Invalid number of arguments\n"
 # define ERR_PIPE "pipe "
 # define ERR_EXECVE "execve "
+# define ERR_MALLOC "mallox "
 # define ERR_CMD "Error : Command not found\n"
 # define ERR_DIR "Error : No such file of directory\n"
-
+# define ERR_FILE "Error : invalid file\n"
 
 typedef struct s_point
 {
-	double x;
-	double y;
-	double z;
-	int shift_x;
-	int shift_y;
-	int p;
+	double		x;
+	double		y;
+	double		z;
+	int			shift_x;
+	int			shift_y;
+	int			p;
 
-}t_point;
+}				t_point;
 
 typedef struct s_map
 {
-	int width;
-	int height;
-	int **map_area;
-	int **map_color;
-}t_map;
+	int			width;
+	int			height;
+	int			**height_map;
+	int			**color_map;
+}				t_map;
+
+typedef struct s_camera
+{
+	double		angle_x;
+	double		angle_y;
+	int			depth;
+	int			zoom;
+}				t_camera;
+
+typedef struct s_data
+{
+	void		*mlx;
+	void		*win;
+	int			color;
+	t_point		point;
+	t_map		map;
+	t_camera	camera;
+}				t_data;
+
+int				get_width_from_file(char *filename);
+int				get_width_from_line(char *filename);
+int				get_height(char *filename);
+
+int				handle_invalid_file(char *filename);
+void			parse_file(char *filename, t_data *data);
 
 #endif
