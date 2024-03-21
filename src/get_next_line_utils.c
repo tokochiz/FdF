@@ -6,11 +6,11 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:36:26 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/02/13 15:46:56 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/21 17:20:16 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
