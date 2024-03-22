@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:51:17 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/21 16:20:29 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/22 12:36:01 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,24 @@ void put_invalid_file(const char *msg)
 {
 	ft_putstr_fd(msg, STDERR_FILENO);
 	exit(EXIT_FAILURE);
+}
+
+int	handle_invalid_file(char *filename)
+{
+	int	fd;
+	int	buf[1];
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		close(fd);
+		return (1);
+	}
+	if (read(fd, buf, 1) < 0)
+	{
+		close(fd);
+		return (1);
+	}
+	close(fd);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/21 19:30:06 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/22 11:26:57 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ typedef struct s_data
 	t_camera	camera;
 }				t_data;
 
+// error
+void	put_error_and_exit(const char *msg);
+void	put_invalid_file(const char *msg);
+
+
+void			free_line(char **line);
 int				get_width_from_file(char *filename);
 int				get_width_from_line(char *filename);
 int				get_height(char *filename);
