@@ -1,45 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/02 16:51:17 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/22 12:36:01 by  ctokoyod        ###   ########.fr       */
+/*   Created: 2023/12/02 18:25:39 by  ctokoyod         #+#    #+#             */
+/*   Updated: 2024/01/25 21:17:23 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "libft.h"
 
-void put_error_and_exit(const char *msg)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	perror(msg);
-	exit(EXIT_FAILURE);
-}
+	size_t	i;
 
-void put_invalid_file(const char *msg)
-{
-	ft_putstr_fd(msg, STDERR_FILENO);
-	exit(EXIT_FAILURE);
-}
-
-int	handle_invalid_file(char *filename)
-{
-	int	fd;
-	int	buf[1];
-
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	if (n == 0)
+		return (0);
+	i = 0;
+	while (i < n && (s1[i] != '\0' || s2[i] != '\0'))
 	{
-		close(fd);
-		return (1);
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
-	if (read(fd, buf, 1) < 0)
-	{
-		close(fd);
-		return (1);
-	}
-	close(fd);
 	return (0);
 }
