@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_wh.c                                           :+:      :+:    :+:   */
+/*   get_w_h.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:18:53 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/22 13:18:32 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/23 18:25:10 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,14 @@ char	**split_str_by_spaces(char *str)
 	return (split_parts);
 }
 
-int	get_width_from_file(char *filename)
+int	get_width(char *line)
 {
 	int		width;
-	int		fd;
-	char	*line;
 	char	**split_parts;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		put_error_and_exit(ERR_FILE);
-	line = get_next_line(fd);
 	if (line == NULL)
-	{
-		close(fd);
 		put_error_and_exit(ERR_FILE);
-	}
 	split_parts = split_str_by_spaces(line);
-	free(line);
-	close(fd);
 	width = 0;
 	while (split_parts[width])
 		width++;
@@ -58,38 +47,19 @@ int	get_width_from_file(char *filename)
 	return (width);
 }
 
-int	get_width_from_line(char *filename)
-{
-	int		width;
-	int		fd;
-	char	*line;
-	char	**split_parts;
-	int		i;
-
-	split_parts = split_str_by_spaces(filename);
-	width = 0;
-	while (split_parts[width])
-		width++;
-	free_line(split_parts);
-	return (width);
-}
-
-int	get_height(char *filename)
+int	get_height(int fd)
 {
 	int		height;
-	int		fd;
-	char	**line;
+	char	*line;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		put_error_and_exit(ERR_FILE);
 	height = 0;
 	line = get_next_line(fd);
+	if (line == NULL)
+		put_error_and_exit(ERR_FILE);
 	while (line != NULL)
 	{
 		height++;
 		free(line);
 	}
-	close(fd);
 	return (height);
 }

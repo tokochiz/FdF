@@ -6,13 +6,14 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/22 11:26:57 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/24 15:09:58 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+# include "../Libft/libft.h"
 # include "../includes/get_next_line.h"
 # include <errno.h>
 # include <fcntl.h>
@@ -24,7 +25,7 @@
 # define ERR_ARGS "Invalid number of arguments\n"
 # define ERR_PIPE "pipe "
 # define ERR_EXECVE "execve "
-# define ERR_MALLOC "mallox "
+# define ERR_MALLOC "malloc "
 # define ERR_CMD "Error : Command not found\n"
 # define ERR_DIR "Error : No such file of directory\n"
 # define ERR_FILE "Error : invalid file\n"
@@ -66,17 +67,25 @@ typedef struct s_data
 	t_camera	camera;
 }				t_data;
 
-// error
-void	put_error_and_exit(const char *msg);
-void	put_invalid_file(const char *msg);
+// check file
+int				check_file_exists(char *filename);
+int				check_file_extension(char *filename);
+int				check_map_empty(char *filename);
+int				check_map_consistent_width(char *filename);
+void			check_file(char *filename);
 
+// error
+void			put_error_and_exit(const char *msg);
+void			put_invalid_file(const char *msg);
 
 void			free_line(char **line);
-int				get_width_from_file(char *filename);
-int				get_width_from_line(char *filename);
-int				get_height(char *filename);
+char			**split_str_by_spaces(char *str);
+int				get_width(char *line);
+int				get_height(int fd);
 
 int				handle_invalid_file(char *filename);
+int				hex_str_to_int(char *hex);
+void			fill_map(int *depth, int *color, char *line);
 void			parse_file(char *filename, t_data *data);
 
 #endif

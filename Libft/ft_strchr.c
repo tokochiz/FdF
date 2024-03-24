@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 17:41:31 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/01/17 20:47:36 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/23 18:31:37 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	ch;
-
-	ch = (char)c;
-	while (*s != '\0')
+	if (s == NULL)
+		return (NULL);
+	while (*s)
 	{
-		if (*s == ch)
+		if (*s == (unsigned char)c)
 			return ((char *)s);
 		s++;
 	}
-	if (ch == '\0')
+	if (c == '\0')
 		return ((char *)s);
 	return (NULL);
 }
