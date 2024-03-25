@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 13:13:57 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/24 15:32:56 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/25 22:24:03 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	check_file_extension(char *filename)
 	char	*extension;
 
 	extension = ft_strrchr(filename, '.');
-	if (extension != NULL && ft_strncmp(extension, ".fdf", 4) == 0)
-		return (1);
-	return (0);
+	if (extension != NULL && ft_strncmp(extension, ".fdf", 4) != 0)
+		return (0);
+	return (1);
 }
 
 int	check_map_empty(char *filename)
@@ -40,27 +40,18 @@ int	check_map_empty(char *filename)
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
-	line = get_next_line(fd);
-	printf("%s\n", line);
-	if (line == NULL)
+	while ((line = get_next_line(fd)) != NULL)
 	{
-		close(fd);
-		return (1);
-	}
-	while (line != NULL)
-	{
-		if (ft_strlen(line) > 1) // 改行のみの行は空行とみなす
+		if (ft_strlen(line) > 0)
 		{
 			free(line);
 			close(fd);
-			return (0);
+			return (1);
 		}
 		free(line);
-		printf("%s\n", line);
-		line = get_next_line(fd);
 	}
 	close(fd);
-	return (1);
+	return (0);
 }
 
 int	check_map_consistent_width(char *filename)
@@ -72,9 +63,13 @@ int	check_map_consistent_width(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	width = -1;
+	current_width = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
+		printf("%s\n", line);
+		printf("%d\n", width);
 		current_width = get_width(line);
+		printf("current_width %d\n", current_width);
 		if (width == -1)
 			width = current_width;
 		else if (width != current_width)
@@ -84,6 +79,7 @@ int	check_map_consistent_width(char *filename)
 			return (0);
 		}
 		free(line);
+		printf("test %d\n", width);
 	}
 	close(fd);
 	return (1);

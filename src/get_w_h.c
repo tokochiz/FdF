@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:18:53 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/23 18:25:10 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/25 22:24:16 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	get_width(char *line)
 
 	if (line == NULL)
 		put_error_and_exit(ERR_FILE);
+
+	
 	split_parts = split_str_by_spaces(line);
 	width = 0;
 	while (split_parts[width])
@@ -53,7 +55,7 @@ int	get_height(int fd)
 	char	*line;
 
 	height = 0;
-	line = get_next_line(fd);
+	line = gnl_remove_newline(fd);
 	if (line == NULL)
 		put_error_and_exit(ERR_FILE);
 	while (line != NULL)

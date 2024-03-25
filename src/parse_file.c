@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:53:03 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/24 15:11:07 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/25 18:39:54 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	parse_file(char *filename, t_data *data)
 
 	fd = open(filename, O_RDONLY);
 	// 横幅を取得する
-	line = get_next_line(fd);
+	line = gnl_remove_newline(fd);
 	if (line == NULL)
 		put_error_and_exit(ERR_FILE);
 	data->map.width = get_width(line);
@@ -108,7 +108,7 @@ void	parse_file(char *filename, t_data *data)
 			put_error_and_exit(ERR_MALLOC);
 		}
 		//  ファイルから1行読み込み、その結果を line 変数に格納
-		line = get_next_line(fd);
+		line = gnl_remove_newline(fd);
 		if (line == NULL)
 			put_error_and_exit(ERR_FILE);
 		// 読み込んだ行の幅が data->map.width と一致するかどうか

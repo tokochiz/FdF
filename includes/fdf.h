@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/24 15:09:58 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/25 18:23:02 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ int				check_file_extension(char *filename);
 int				check_map_empty(char *filename);
 int				check_map_consistent_width(char *filename);
 void			check_file(char *filename);
+
+// gnl remove newline
+char			*gnl_remove_newline(int fd);
 
 // error
 void			put_error_and_exit(const char *msg);
