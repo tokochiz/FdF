@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/25 18:40:35 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/26 19:07:19 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	check_argc(int argc)
 
 int	main(int argc, char *argv[])
 {
-	// t_data data;
+	t_data data;
 
 	// char* i = argv[1];
 	// printf("%s\n", i);
@@ -31,7 +31,7 @@ int	main(int argc, char *argv[])
 	check_file(argv[1]);
 
 	// // TODO マップの読み込みをして、構造体に格納する
-	// parse_file(argv[1], &data);
+	parse_file(argv[1], &data);
 
 	// TODO 二次元配列に対応する行列に突っ込む　GNL, split, atoi 使う
 

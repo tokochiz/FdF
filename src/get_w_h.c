@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:18:53 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/25 22:24:16 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/26 19:35:58 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,8 @@ int	get_height(int fd)
 	int		height;
 	char	*line;
 
-	height = 0;
-	line = gnl_remove_newline(fd);
-	if (line == NULL)
-		put_error_and_exit(ERR_FILE);
-	while (line != NULL)
+	height = 1;
+	while ((line = gnl_remove_newline(fd)) != NULL)
 	{
 		height++;
 		free(line);
