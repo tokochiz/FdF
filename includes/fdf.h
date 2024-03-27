@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FdF.h                                              :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/25 18:23:02 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/27 17:32:40 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,11 @@ char			*gnl_remove_newline(int fd);
 void			put_error_and_exit(const char *msg);
 void			put_invalid_file(const char *msg);
 
+// get_width _height
 void			free_line(char **line);
 char			**split_str_by_spaces(char *str);
 int				get_width(char *line);
-int				get_height(int fd);
+int				get_height(char *filename);
 
 int				handle_invalid_file(char *filename);
 int				hex_str_to_int(char *hex);

@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:53:03 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/26 19:28:07 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/27 17:34:03 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,31 @@ void	parse_file(char *filename, t_data *data)
 	//int		i;
 	int		fd;
 	char	*line;
-
+	// data->map の初期化
+	data->map.width = 0;
+	data->map.height = 0;
 	fd = open(filename, O_RDONLY);
+	if(fd < 0)
+		put_error_and_exit(ERR_FILE);
+		
 	// 横幅を取得する
 	line = gnl_remove_newline(fd);
-	if (line == NULL)
+	if (line == NULL){
+		close(fd);
 		put_error_and_exit(ERR_FILE);
+		}
+		
 	printf("***line : %s\n", line);
+	
 	data->map.width = get_width(line);
-	printf("***width : %d\n", data->map.width);
 	free(line);
 	// 高さを取得する
-	data->map.height = get_height(fd);
-		printf("<parse_file>: width = %d\n", data->map.width);
+
+
+	data->map.height = get_height(filename);
+
+	close(fd);
+	printf("<parse_file>: width = %d\n", data->map.width);
 	printf("<parse_file>: height = %d\n", data->map.height);
 	
 	/* ーーーーーーーーーーーーーーーーーーあとで消すーーーーーーーーーーー-----ーーーーーーーーーーー*/

@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:18:53 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/26 19:35:58 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/27 17:35:21 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	free_line(char **line)
 		free(line[i++]);
 	free(line);
 }
-
 char	**split_str_by_spaces(char *str)
 {
 	char	**split_parts;
@@ -34,31 +33,47 @@ char	**split_str_by_spaces(char *str)
 
 int	get_width(char *line)
 {
-	int		width;
-	char	**split_parts;
+	int	width;
+	int	i;
 
 	if (line == NULL)
 		put_error_and_exit(ERR_FILE);
-
-	
-	split_parts = split_str_by_spaces(line);
-	width = 0;
-	while (split_parts[width])
-		width++;
-	free_line(split_parts);
+	width = 1;
+	i = 0;
+	// スペースの場合、widthをインクリメントし、連続するスペースをスキップ
+	while (line[i] != '\0')
+	{
+		if (line[i] == ' ')
+		{
+			width++;
+			while (line[i] == ' ')
+				i++;
+		}
+		else
+			i++;
+	}
 	return (width);
 }
 
-int	get_height(int fd)
+int	get_height(char *filename)
 {
+	int		fd;
 	int		height;
 	char	*line;
 
-	height = 1;
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		put_error_and_exit(ERR_FILE);
+	height = 0;
+	printf("test height [h] ; %d\n", height);
 	while ((line = gnl_remove_newline(fd)) != NULL)
+	//while ((line = get_next_line(fd)) != NULL)
 	{
+			printf("test height [line] ; %s\n", line);
 		height++;
+		printf("test height [h] ; %d\n", height);
 		free(line);
 	}
+	close(fd);
 	return (height);
 }
