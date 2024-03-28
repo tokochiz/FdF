@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 13:13:57 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/27 17:07:24 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/28 23:40:37 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	check_file_exists(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (0);
+		return (1);
 	close(fd);
-	return (1);
+	return (0);
 }
 
 int	check_file_extension(char *filename)
@@ -40,8 +40,8 @@ int	check_file_extension(char *filename)
 	last_slash = ft_strrchr(filename, '/');
 	len = ft_strlen(filename);
 	if (extension == NULL || ft_strncmp(extension, ".fdf", 4) != 0 || len == 4)
-		return (0);
-	return (1);
+		return (1);
+	return (0);
 }
 
 int	check_map_empty(char *filename)
@@ -50,59 +50,66 @@ int	check_map_empty(char *filename)
 	char	*line;
 
 	fd = open(filename, O_RDONLY);
-	while ((line = get_next_line(fd)) != NULL)
+	if (fd < 0)
+		return (1);
+	line = get_next_line(fd);
+	if (line == NULL)
 	{
-		if (ft_strlen(line) > 0)
-		{
-			free(line);
-			close(fd);
-			return (1);
-		}
-		free(line);
+		close(fd);
+		return (1);
 	}
+	free(line);
 	close(fd);
 	return (0);
 }
 
-int	check_map_consistent_width(char *filename)
+int	check_map_consistent_width(int fd)
 {
-	int		fd;
 	int		width;
 	int		current_width;
+	int		first_line_width;
 	char	*line;
 
-	fd = open(filename, O_RDONLY);
 	width = -1;
 	current_width = 0;
- 
-while ((line = gnl_remove_newline(fd)) != NULL)
+	first_line_width = -1;
+	while ((line = gnl_remove_newline(fd)) != NULL)
 	{
 		current_width = get_width(line);
 		if (width == -1)
+		{
 			width = current_width;
+			first_line_width = current_width;
+		}
 		else if (width != current_width)
 		{
 			free(line);
-			close(fd);
-			return (0);
+			return (1);
 		}
 		free(line);
 	}
-	close(fd);
-	return (1);
+	if (current_width != first_line_width)
+		return (1);
+	return (0);
 }
 
 void	check_file(char *filename)
 {
-	if (!check_file_exists(filename))
+	int fd;
+	if (check_file_exists(filename))
 		put_invalid_file("Error: File does not exist or cannot be read\n");
-	if (!check_file_extension(filename))
+	if (check_file_extension(filename))
 		put_invalid_file("Error: Invalid file extension\n");
-	if (!check_map_empty(filename))
+	if (check_map_empty(filename))
 		put_invalid_file("Error: Empty map file\n");
 
 	//  TODO : 最後に改行が入っているか入っていないかで動作が異なる　改行がない場合に、エラー判定されてしまうのを治す
-	if (!check_map_consistent_width(filename))
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		put_invalid_file(ERR_OPEN);
+	if (check_map_consistent_width(fd))
 		put_invalid_file("Error: Inconsistent map width\n");
+	close(fd);
 	// TODO : 隠しファイルを弾く
 }
