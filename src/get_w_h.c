@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:18:53 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/27 17:35:21 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/29 18:18:39 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	get_width(char *line)
 {
 	int	width;
 	int	i;
-
+printf("<+++++++++++++test width [line] : |%s|\n", line);
 	if (line == NULL)
 		put_error_and_exit(ERR_FILE);
 	width = 1;
@@ -55,25 +55,25 @@ int	get_width(char *line)
 	return (width);
 }
 
-int	get_height(char *filename)
+int	get_height(int fd)
 {
-	int		fd;
+	//int		fd;
 	int		height;
 	char	*line;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		put_error_and_exit(ERR_FILE);
-	height = 0;
-	printf("test height [h] ; %d\n", height);
-	while ((line = gnl_remove_newline(fd)) != NULL)
+	// fd = open(filename, O_RDONLY);
+	// if (fd < 0)
+	// 	put_error_and_exit(ERR_FILE);
+	height = 1;
+	 while ((line = gnl_remove_newline(fd)) != NULL)
 	//while ((line = get_next_line(fd)) != NULL)
 	{
-			printf("test height [line] ; %s\n", line);
-		height++;
+		printf("test height [line] : |%s|\n", line);
+		//if (ft_strlen(line) > 1 || line[0] != '\n')
+			height++;
 		printf("test height [h] ; %d\n", height);
 		free(line);
 	}
-	close(fd);
+	//close(fd);
 	return (height);
 }

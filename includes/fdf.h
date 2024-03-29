@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/27 17:32:40 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/29 17:25:26 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define ERR_PIPE "pipe "
 # define ERR_EXECVE "execve "
 # define ERR_MALLOC "malloc "
+# define ERR_OPEN "open "
 # define ERR_CMD "Error : Command not found\n"
 # define ERR_DIR "Error : No such file of directory\n"
 # define ERR_FILE "Error : invalid file\n"
@@ -71,6 +72,7 @@ typedef struct s_data
 int				check_file_exists(char *filename);
 int				check_file_extension(char *filename);
 int				check_map_empty(char *filename);
+int				check_line_width(char *line, int *width, int *first_line_width);
 int				check_map_consistent_width(char *filename);
 void			check_file(char *filename);
 
@@ -85,7 +87,7 @@ void			put_invalid_file(const char *msg);
 void			free_line(char **line);
 char			**split_str_by_spaces(char *str);
 int				get_width(char *line);
-int				get_height(char *filename);
+int				get_height(int fd);
 
 int				handle_invalid_file(char *filename);
 int				hex_str_to_int(char *hex);
