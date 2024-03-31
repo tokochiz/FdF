@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/31 16:33:44 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/31 17:37:12 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,8 @@ int				handle_invalid_file(char *filename);
 int				hex_str_to_int(char *hex);
 void			fill_map(int *depth, int *color, char *line);
 void			parse_file(char *filename, t_data *data);
+void	allocate_map_memory(t_data *data);
+void	allocate_row_memory(t_data *data, int row);
+void	read_map_data(char *filename, t_data *data);
 
 #endif

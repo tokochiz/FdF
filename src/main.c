@@ -6,11 +6,18 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/26 19:07:19 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/31 16:36:42 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+#include <libc.h>
+
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q fdf");
+}
 
 void	check_argc(int argc)
 {
@@ -22,18 +29,11 @@ int	main(int argc, char *argv[])
 {
 	t_data data;
 
-	// char* i = argv[1];
-	// printf("%s\n", i);
-	// TODO コマンドライん引数の検証をする
-	check_argc(argc);
-
-	// TODO マップファイルの形式や内容を検証する　破損していないか、正しい形かチェック
+	check_argc(argc);	
+	
 	check_file(argv[1]);
-
-	// // TODO マップの読み込みをして、構造体に格納する
+	
 	parse_file(argv[1], &data);
-
-	// TODO 二次元配列に対応する行列に突っ込む　GNL, split, atoi 使う
 
 	// TODO 読み込んだ点データを等角投影に変換する　→３D空間の点が、２D表示上で表現
 
