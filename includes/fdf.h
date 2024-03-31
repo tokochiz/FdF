@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/29 17:25:26 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/31 16:33:44 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,21 @@ int				check_line_width(char *line, int *width, int *first_line_width);
 int				check_map_consistent_width(char *filename);
 void			check_file(char *filename);
 
-// gnl remove newline
-char			*gnl_remove_newline(int fd);
-
-// error
+// put_error
 void			put_error_and_exit(const char *msg);
 void			put_invalid_file(const char *msg);
 
-// get_width _height
-void			free_line(char **line);
+// gnl_helpers
+char			*gnl_remove_trailing_chars(int fd);
+void			reset_gnl(char *filename);
+
+// get_width & height
+int				get_width_from_line(char *line);
+int				get_width(char *filename);
+int				get_height(char *filename);
+
+// 
 char			**split_str_by_spaces(char *str);
-int				get_width(char *line);
-int				get_height(int fd);
 
 int				handle_invalid_file(char *filename);
 int				hex_str_to_int(char *hex);
