@@ -6,11 +6,11 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:45:06 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/20 21:54:09 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/23 18:22:58 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/get_next_line.h"
+#include "../includes/fdf.h"
 
 static char	*release_memory_buffer(char *buffer)
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_wh.c                                           :+:      :+:    :+:   */
+/*   get_w_h.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:18:53 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/22 13:18:32 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/29 18:18:39 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	free_line(char **line)
 		free(line[i++]);
 	free(line);
 }
-
 char	**split_str_by_spaces(char *str)
 {
 	char	**split_parts;
@@ -32,64 +31,49 @@ char	**split_str_by_spaces(char *str)
 	return (split_parts);
 }
 
-int	get_width_from_file(char *filename)
+int	get_width(char *line)
 {
-	int		width;
-	int		fd;
-	char	*line;
-	char	**split_parts;
-
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		put_error_and_exit(ERR_FILE);
-	line = get_next_line(fd);
+	int	width;
+	int	i;
+printf("<+++++++++++++test width [line] : |%s|\n", line);
 	if (line == NULL)
-	{
-		close(fd);
 		put_error_and_exit(ERR_FILE);
+	width = 1;
+	i = 0;
+	// スペースの場合、widthをインクリメントし、連続するスペースをスキップ
+	while (line[i] != '\0')
+	{
+		if (line[i] == ' ')
+		{
+			width++;
+			while (line[i] == ' ')
+				i++;
+		}
+		else
+			i++;
 	}
-	split_parts = split_str_by_spaces(line);
-	free(line);
-	close(fd);
-	width = 0;
-	while (split_parts[width])
-		width++;
-	free_line(split_parts);
 	return (width);
 }
 
-int	get_width_from_line(char *filename)
+int	get_height(int fd)
 {
-	int		width;
-	int		fd;
-	char	*line;
-	char	**split_parts;
-	int		i;
-
-	split_parts = split_str_by_spaces(filename);
-	width = 0;
-	while (split_parts[width])
-		width++;
-	free_line(split_parts);
-	return (width);
-}
-
-int	get_height(char *filename)
-{
+	//int		fd;
 	int		height;
-	int		fd;
-	char	**line;
+	char	*line;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		put_error_and_exit(ERR_FILE);
-	height = 0;
-	line = get_next_line(fd);
-	while (line != NULL)
+	// fd = open(filename, O_RDONLY);
+	// if (fd < 0)
+	// 	put_error_and_exit(ERR_FILE);
+	height = 1;
+	 while ((line = gnl_remove_newline(fd)) != NULL)
+	//while ((line = get_next_line(fd)) != NULL)
 	{
-		height++;
+		printf("test height [line] : |%s|\n", line);
+		//if (ft_strlen(line) > 1 || line[0] != '\n')
+			height++;
+		printf("test height [h] ; %d\n", height);
 		free(line);
 	}
-	close(fd);
+	//close(fd);
 	return (height);
 }

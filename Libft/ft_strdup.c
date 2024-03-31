@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 17:24:31 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/01/24 22:14:16 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/23 18:21:56 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s1)
 	size_t	s_len;
 	int		i;
 
+	if (s1 == NULL)
+		return (NULL);
 	s_len = ft_strlen(s1);
 	p = (char *)malloc(sizeof(char) * (s_len + 1));
 	if (p == NULL)
