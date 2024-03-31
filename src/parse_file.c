@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:53:03 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/29 18:08:56 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/03/31 17:56:36 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,17 @@ int	hex_str_to_int(char *hex)
 	}
 	return (decimal);
 }
+
+char	**split_str_by_spaces(char *str)
+{
+	char	**split_parts;
+
+	split_parts = ft_split(str, ' ');
+	if (split_parts == NULL)
+		put_error_and_exit(ERR_MALLOC);
+	return (split_parts);
+}
+
 void	fill_map(int *depth, int *color, char *line)
 {
 	char	**split_parts;
@@ -49,16 +60,11 @@ void	fill_map(int *depth, int *color, char *line)
 		comma_pos = ft_strchr(split_parts[i], ',');
 		if (comma_pos != NULL)
 		{
-			// depth_len = comma_pos - split_parts[i];// commaの位置ー文字列の先頭の位置の差
 			depth_str = ft_substr(split_parts[i], 0, comma_pos
-				- split_parts[i]);
-			// ft_substr(元の文字列、開始位置、 取り出す長さ);
+					- split_parts[i]);
 			depth[i] = ft_atoi(depth_str);
 			free(depth_str);
 			color[i] = hex_str_to_int(comma_pos + 1);
-			/* ーーーーーーーーーーーーーーーーーーあとで消すーーーーーーー-----ーーーーーーーーーーーーーーー*/
-			printf("<fill_map>: depth[%d] = %d, color[%d] = %d\n", i, depth[i],
-				i, color[i]);
 		}
 		else
 		{
@@ -69,74 +75,65 @@ void	fill_map(int *depth, int *color, char *line)
 	}
 }
 
-void	parse_file(char *filename, t_data *data)
+void	allocate_map_memory(t_data *data)
+{
+	data->map.height_map = (int **)malloc(sizeof(int *) * data->map.height + 1);
+	data->map.color_map = (int **)malloc(sizeof(int *) * data->map.height + 1);
+}
+
+void	allocate_row_memory(t_data *data, int row)
+{
+	data->map.height_map[row] = (int *)malloc(sizeof(int) * data->map.width);
+	data->map.color_map[row] = (int *)malloc(sizeof(int) * data->map.width);
+	if (data->map.height_map[row] == NULL || data->map.color_map[row] == NULL)
+	{
+		free(data->map.height_map);
+		free(data->map.color_map);
+		put_error_and_exit(ERR_MALLOC);
+	}
+}
+
+void	read_map_data(char *filename, t_data *data)
 {
 	int		fd;
+	int		i;
 	char	*line;
 
-	// int		i;
-	// data->map の初期化
-	data->map.width = 0;
-	data->map.height = 0;
+	reset_gnl(filename);
 	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		put_error_and_exit(ERR_FILE);
-	// 横幅を取得する
-	line = gnl_remove_newline(fd);
-	if (line == NULL)
+	i = 0;
+	while (i < data->map.height)
 	{
-		close(fd);
-		put_error_and_exit(ERR_FILE);
+		allocate_row_memory(data, i);
+		line = gnl_remove_trailing_chars(fd);
+		if (line == NULL)
+			put_error_and_exit(ERR_FILE);
+		if (data->map.width != get_width_from_line(line))
+		{
+			free(data->map.height_map[i]);
+			free(data->map.color_map[i]);
+			put_invalid_file(ERR_FILE);
+		}
+		fill_map(data->map.height_map[i], data->map.color_map[i], line);
+		free(line);
+		i++;
 	}
-	printf("***line : %s\n", line);
-	data->map.width = get_width(line);
-	free(line);
-	// 高さを取得する
-	close(fd);
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		put_error_and_exit(ERR_FILE);
-	data->map.height = get_height(fd);
-	close(fd);
+	data->map.height_map[i] = NULL;
+}
+
+void	parse_file(char *filename, t_data *data)
+{
+	// int		fd;
+	// int		i;
+	// char	*line;
+	data->map.width = get_width(filename);
+	data->map.height = get_height(filename);
+	
+	/* ーーーーーーーーーーーーーーーーーーあとで消すーーーーーーーーーーーーーー-----ーーーーーーーー*/
 	printf("<parse_file>: width = %d\n", data->map.width);
 	printf("<parse_file>: height = %d\n", data->map.height);
-	/* ーーーーーーーーーーーーーーーーーーあとで消すーーーーーーーーーーー-----ーーーーーーーーーーー*/
+	/* ーーーーーーーーーーーーーーーーーーあとで消すーーーーーーーーーーーーーー-----ーーーーーーーー*/
+	allocate_map_memory(data);
+	read_map_data(filename, data);
 }
-// 	/* ーーーーーーーーーーーーーーーーーーあとで消すーーーーーーーーーーーーーー-----ーーーーーーーー*/
-// 	// 取得した高さ情報によって、領域を確保する
-// 	data->map.height_map = (int **)malloc(sizeof(int *) * data->map.height + 1);
-// 	// 各地点に対応する色情報格納するための領域
-// 	data->map.color_map = (int **)malloc(sizeof(int *) * data->map.height + 1);
-// 	// ファイル先頭に戻る
-// 	close(fd);
-// 	fd = open(filename, O_RDONLY);
-// 	i = 0;
-// 	while (i < data->map.height)
-// 	{
-// 		// 高さ[i]に横幅分の領域を確保する
-// 		data->map.height_map[i] = (int *)malloc(sizeof(int) * data->map.width);
-// 		data->map.color_map[i] = (int *)malloc(sizeof(int) * data->map.width);
-// 		if (data->map.height_map[i] == NULL || data->map.color_map[i] == NULL)
-// 		{
-// 			free(data->map.height_map);
-// 			free(data->map.color_map);
-// 			put_error_and_exit(ERR_MALLOC);
-// 		}
-// 		//  ファイルから1行読み込み、その結果を line 変数に格納
-// 		line = gnl_remove_newline(fd);
-// 		if (line == NULL)
-// 			put_error_and_exit(ERR_FILE);
-// 		// 読み込んだ行の幅が data->map.width と一致するかどうか
-// 		if (data->map.width != get_width(line))
-// 		{
-// 			free(data->map.height_map[i]);
-// 			free(data->map.color_map[i]);
-// 			put_invalid_file(ERR_FILE);
-// 		}
-// 		// 読み込んだ行のデータを格納　高さと色
-// 		fill_map(data->map.height_map[i], data->map.color_map[i], line);
-// 		free(line);
-// 		i++;
-// 	}
-// 	data->map.height_map[i] = NULL;
-// }
+
