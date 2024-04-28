@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/04/27 17:58:46 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/04/28 21:51:39 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	isometric(float *x, float *y, int z, t_data *data)
 
 	original_x = *x;
 	original_y = *y;
-	*x = (original_x - original_y) * cos(data->camera.angle_x);
-	*y = (original_x + original_y) * sin(data->camera.angle_y) - z;
+	*x = (original_x - original_y) * cos(data->view.angle_x);
+	*y = (original_x + original_y) * sin(data->view.angle_y) - z;
 }
 
 void	draw(t_data *data)
@@ -30,7 +30,7 @@ void	draw(t_data *data)
 	int	y;
 
 	y = 0;
-	statusinfo(data);
+	darw_info(data);
 	while (y < data->map.height)
 	{
 		x = 0;
