@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:53:03 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/31 17:56:36 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/02 19:31:59 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,32 +46,38 @@ char	**split_str_by_spaces(char *str)
 	return (split_parts);
 }
 
-void	fill_map(int *depth, int *color, char *line)
+void	fill_map(int height, char *line, t_data *data)
 {
 	char	**split_parts;
 	char	*comma_pos;
 	char	*depth_str;
-	int		i;
+	int		j;
 
 	split_parts = split_str_by_spaces(line);
-	i = 0;
-	while (split_parts[i] != '\0')
+	j = 0;
+	while (split_parts[j] != '\0')
 	{
-		comma_pos = ft_strchr(split_parts[i], ',');
+		comma_pos = ft_strchr(split_parts[j], ',');
 		if (comma_pos != NULL)
 		{
-			depth_str = ft_substr(split_parts[i], 0, comma_pos
-					- split_parts[i]);
-			depth[i] = ft_atoi(depth_str);
+			depth_str = ft_substr(split_parts[j], 0, comma_pos
+				- split_parts[j]);
+			data->map.height_map[height][j] = ft_atoi(depth_str);
 			free(depth_str);
-			color[i] = hex_str_to_int(comma_pos + 1);
+			data->map.color_map[height][j] = hex_str_to_int(comma_pos + 1);
+			printf("h[%d][%d] %d ", height, j, data->map.height_map[height][j]);
+			printf("c[%d][%d] %d \n", height, j,
+				data->map.color_map[height][j]);
 		}
 		else
 		{
-			depth[i] = ft_atoi(split_parts[i]);
-			color[i] = ft_atoi("0");
+			data->map.height_map[height][j] = ft_atoi(split_parts[j]);
+			data->map.color_map[height][j] = ft_atoi("0");
+			printf("h[%d][%d] %d ", height, j, data->map.height_map[height][j]);
+			printf("c[%d][%d] %d \n", height, j,
+				data->map.color_map[height][j]);
 		}
-		i++;
+		j++;
 	}
 }
 
@@ -81,6 +87,7 @@ void	allocate_map_memory(t_data *data)
 	data->map.color_map = (int **)malloc(sizeof(int *) * data->map.height + 1);
 }
 
+// allocate 割り当てる　メモリ割り当て　
 void	allocate_row_memory(t_data *data, int row)
 {
 	data->map.height_map[row] = (int *)malloc(sizeof(int) * data->map.width);
@@ -114,7 +121,7 @@ void	read_map_data(char *filename, t_data *data)
 			free(data->map.color_map[i]);
 			put_invalid_file(ERR_FILE);
 		}
-		fill_map(data->map.height_map[i], data->map.color_map[i], line);
+		fill_map(i, line, data);
 		free(line);
 		i++;
 	}
@@ -124,11 +131,8 @@ void	read_map_data(char *filename, t_data *data)
 void	parse_file(char *filename, t_data *data)
 {
 	// int		fd;
-	// int		i;
-	// char	*line;
 	data->map.width = get_width(filename);
 	data->map.height = get_height(filename);
-	
 	/* ーーーーーーーーーーーーーーーーーーあとで消すーーーーーーーーーーーーーー-----ーーーーーーーー*/
 	printf("<parse_file>: width = %d\n", data->map.width);
 	printf("<parse_file>: height = %d\n", data->map.height);
@@ -136,4 +140,3 @@ void	parse_file(char *filename, t_data *data)
 	allocate_map_memory(data);
 	read_map_data(filename, data);
 }
-
