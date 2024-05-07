@@ -6,41 +6,47 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/04/28 21:51:39 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/07 21:27:35 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
 // TODO アイソメトリック投影の計算
-void	isometric(float *x, float *y, int z, t_data *data)
+void	isometric(int *x, int *y, int z, t_data *data)
 {
-	float	original_x;
-	float	original_y;
+	int	original_x;
+	int	original_y;
 
 	original_x = *x;
 	original_y = *y;
-	*x = (original_x - original_y) * cos(data->view.angle_x);
-	*y = (original_x + original_y) * sin(data->view.angle_y) - z;
+	*x = round(cos(data->view.angle_x) * (original_x - original_y));
+	*y = round(sin(data->view.angle_y) * (original_x + original_y) - z);
 }
 
+// set_points(t_data *data, float *x, float *y, int check)
+// {
+	
+// }
+
+// coordinates  座標
 void	draw(t_data *data)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	darw_info(data);
+	display_info(data);
 	while (y < data->map.height)
 	{
 		x = 0;
 		while (x < data->map.width)
 		{
 			data->color = data->map.color_map[x][y];
-			if (x < data->map.width - 1)
-				set_coordinates(data, x, y, 0);
-			if (y < data->map.height - 1)
-				set_coordinates(data, x, y, 1);
+			// if (x < data->map.width - 1)
+			// 	set_points(data, x, y, 0);
+			// if (y < data->map.height - 1)
+			// 	set_points(data, x, y, 1);
 			x++;
 		}
 		y++;
@@ -48,7 +54,7 @@ void	draw(t_data *data)
 }
 
 // TODO グラフィック描画の管理
-　/**
+/*
  * 実行フロー
 グラフィック描画アプリケーションの一般的な実行フローは次のようになります：
 
@@ -66,5 +72,5 @@ void	draw(t_data *data)
 ユーザーからの入力を受け付け、それに応じて画面表示や内部データを更新します。
 クリーンアップ:
 アプリケーションの終了処理として、開放すべきリソースを適切に解放し、システム状態をクリーンな状態に戻します。
- *
+ 
 */

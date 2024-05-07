@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:53:03 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/05/02 19:31:59 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/03 18:55:50 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	fill_map(int height, char *line, t_data *data)
 		else
 		{
 			data->map.height_map[height][j] = ft_atoi(split_parts[j]);
-			data->map.color_map[height][j] = ft_atoi("0");
+			data->map.color_map[height][j] = DEFAULT_COLOR;
 			printf("h[%d][%d] %d ", height, j, data->map.height_map[height][j]);
 			printf("c[%d][%d] %d \n", height, j,
 				data->map.color_map[height][j]);
@@ -130,7 +130,7 @@ void	read_map_data(char *filename, t_data *data)
 
 void	parse_file(char *filename, t_data *data)
 {
-	// int		fd;
+
 	data->map.width = get_width(filename);
 	data->map.height = get_height(filename);
 	/* ーーーーーーーーーーーーーーーーーーあとで消すーーーーーーーーーーーーーー-----ーーーーーーーー*/
