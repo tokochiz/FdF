@@ -1,16 +1,15 @@
 NAME = fdf
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR) 
-
-LDFLAGS = -lft -libmlx -framework OpenGL -framework AppKit
+CFLAGS = -Wall -Wextra -Werror
+LDFLAGS = -lmlx -framework openGL -framework AppKit
 
 LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = ./Libft/
 LIBFT_HEADERS = $(LIBFT_DIRECTORY)includes/
 
-MINILIBX = $(MINILIBX_DIR)libmlx.a
-MINILIBX_DIR = ./minilibx_macos/
-MINILIBX_HEADERS = $(MINILIBX_DIR)
+# MINILIBX = $(MINILIBX_DIR)libmlx.a
+# MINILIBX_DIR = ./minilibx_macos/
+# MINILIBX_HEADERS = $(MINILIBX_DIR)
 
 INC_DIR = includes
 SRC_DIR = src
@@ -34,14 +33,11 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(MINILIBX) 
+$(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(OBJS) 
 
 $(LIBFT): 
 	make -C $(LIBFT_DIR) 
-
-$(MINILIBX):
-	make -C $(MINILIBX_DIR)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ 
@@ -52,7 +48,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	make -C $(LIBFT_DIR)  fclean
-	make -C $(MINILIBX_DIR) fclean
 
 re: fclean all
 
