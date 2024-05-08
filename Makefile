@@ -1,14 +1,15 @@
 NAME = fdf
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR) 
-LDFLAGS = -L $(LIBFT_DIR) -L $(MINILIBX_DIR) -lft -libmlx -framework OpenGL -framework AppKit
+
+LDFLAGS = -lft -libmlx -framework OpenGL -framework AppKit
 
 LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = ./Libft/
 LIBFT_HEADERS = $(LIBFT_DIRECTORY)includes/
 
 MINILIBX = $(MINILIBX_DIR)libmlx.a
-MINILIBX_DIR = ./minilibx/
+MINILIBX_DIR = ./minilibx_macos/
 MINILIBX_HEADERS = $(MINILIBX_DIR)
 
 INC_DIR = includes
@@ -24,7 +25,6 @@ SRC_FILES = main.c \
 			display_info.c
 			
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
-
 OBJS = $(SRCS:.c=.o)
 
 # COLORS
@@ -34,14 +34,14 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MINILIBX) $(framework)
+$(NAME): $(OBJS) $(LIBFT) $(MINILIBX) 
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(OBJS) 
 
 $(LIBFT): 
-	make -C libft 
+	make -C $(LIBFT_DIR) 
 
 $(MINILIBX):
-	make -C libmlx
+	make -C $(MINILIBX_DIR)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ 
@@ -51,8 +51,8 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	make -C libft fclean
-	make -C minilibx fclean
+	make -C $(LIBFT_DIR)  fclean
+	make -C $(MINILIBX_DIR) fclean
 
 re: fclean all
 
