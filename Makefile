@@ -1,11 +1,10 @@
 NAME = fdf
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -lmlx -framework openGL -framework AppKit
+LDFLAGS = -L./libft -lft -lmlx -framework openGL -framework AppKit
 
 LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = ./Libft/
-LIBFT_HEADERS = $(LIBFT_DIRECTORY)includes/
 
 # MINILIBX = $(MINILIBX_DIR)libmlx.a
 # MINILIBX_DIR = ./minilibx_macos/

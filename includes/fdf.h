@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/04/28 21:48:43 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/08 21:43:05 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <mlx.h>
+//# include <X11/Xlib.h>
 
 # define ERR_ARGS "Invalid number of arguments\n"
 # define ERR_PIPE "pipe "
@@ -31,6 +33,13 @@
 # define ERR_CMD "Error : Command not found\n"
 # define ERR_DIR "Error : No such file of directory\n"
 # define ERR_FILE "Error : invalid file\n"
+
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
+
+// デフォルトの色を指定する
+# define DEFAULT_COLOR 0xffffff
+# define TEXT_COLOR 0xeaeaea
 
 // 元の座標
 typedef struct s_point
@@ -56,8 +65,8 @@ typedef struct s_map
 // 画面に映す座標
 typedef struct s_view
 {
-	double angle_x; // 0.523599
-	double	angle_y; // 0.523599
+	double	angle_x;
+	double	angle_y;
 	int		depth;
 	int		zoom;
 }			t_view;
@@ -66,6 +75,7 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
+	void	*img;
 	int		color;
 	t_point	point;
 	t_map	map;
@@ -98,10 +108,16 @@ char		**split_str_by_spaces(char *str);
 
 int			handle_invalid_file(char *filename);
 int			hex_str_to_int(char *hex);
-void		fill_map(int *depth, int *color, char *line);
+void		fill_map(int i, char *line, t_data *data);
 void		parse_file(char *filename, t_data *data);
 void		allocate_map_memory(t_data *data);
 void		allocate_row_memory(t_data *data, int row);
 void		read_map_data(char *filename, t_data *data);
+
+// draw
+void		draw(t_data *data);
+
+// display
+void	display_info(t_data *data);
 
 #endif

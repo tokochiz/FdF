@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 19:18:53 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/31 16:32:24 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/04/27 17:55:12 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,17 @@ int	get_height(char *filename)
 		put_error_and_exit(ERR_FILE);
 	height = 0;
 	line = gnl_remove_trailing_chars(fd);
+	/* ーーーーーーーーーーーーーーーーーーあとで消すーーーーーーーーーーーーーー-----ーーーーーーーー*/
 	printf("<get height> line1 : |%s|\n", line);
+	/* ーーーーーーーーーーーーーーーーーーあとで消すーーーーーーーーーーーーーー-----ーーーーーーーー*/
+
 	while (line != NULL)
 	{
 		if (line[0] != '\n' || line[0] != ' ' || line[0] != '\t')
 			height++;
 		free(line);
 		line = gnl_remove_trailing_chars(fd);
+		/* ーーーーーーーーーーーーーーーーーーあとで消すーーーーーーーーーーーーーー-----ーーーーーーーー*/
 		printf("<get height> line2 : |%s|\n", line);
 	}
 	free(line);
