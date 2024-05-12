@@ -1,6 +1,6 @@
 NAME = fdf
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 LDFLAGS = -L./libft -lft -lmlx -framework openGL -framework AppKit
 
 LIBFT = $(LIBFT_DIR)libft.a

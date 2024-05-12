@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/05/07 21:27:35 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/12 19:30:53 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	draw(t_data *data)
 		while (x < data->map.width)
 		{
 			data->color = data->map.color_map[x][y];
-			// if (x < data->map.width - 1)
+			if (x < data->map.width - 1)
 			// 	set_points(data, x, y, 0);
 			// if (y < data->map.height - 1)
 			// 	set_points(data, x, y, 1);

@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:53:03 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/05/03 18:55:50 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/12 19:23:40 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,11 @@ void	fill_map(int height, char *line, t_data *data)
 			data->map.height_map[height][j] = ft_atoi(depth_str);
 			free(depth_str);
 			data->map.color_map[height][j] = hex_str_to_int(comma_pos + 1);
-			printf("h[%d][%d] %d ", height, j, data->map.height_map[height][j]);
-			printf("c[%d][%d] %d \n", height, j,
-				data->map.color_map[height][j]);
 		}
 		else
 		{
 			data->map.height_map[height][j] = ft_atoi(split_parts[j]);
 			data->map.color_map[height][j] = DEFAULT_COLOR;
-			printf("h[%d][%d] %d ", height, j, data->map.height_map[height][j]);
-			printf("c[%d][%d] %d \n", height, j,
-				data->map.color_map[height][j]);
 		}
 		j++;
 	}
@@ -83,8 +77,8 @@ void	fill_map(int height, char *line, t_data *data)
 
 void	allocate_map_memory(t_data *data)
 {
-	data->map.height_map = (int **)malloc(sizeof(int *) * data->map.height + 1);
-	data->map.color_map = (int **)malloc(sizeof(int *) * data->map.height + 1);
+	data->map.height_map = (int **)malloc(sizeof(int *) * (data->map.height + 1));
+	data->map.color_map = (int **)malloc(sizeof(int *) * (data->map.height + 1));
 }
 
 // allocate 割り当てる　メモリ割り当て　
@@ -125,12 +119,12 @@ void	read_map_data(char *filename, t_data *data)
 		free(line);
 		i++;
 	}
+	printf("err %d  tate:%d yoko:%d\n", i, data->map.width, data->map.height);
 	data->map.height_map[i] = NULL;
 }
 
 void	parse_file(char *filename, t_data *data)
 {
-
 	data->map.width = get_width(filename);
 	data->map.height = get_height(filename);
 	/* ーーーーーーーーーーーーーーーーーーあとで消すーーーーーーーーーーーーーー-----ーーーーーーーー*/
