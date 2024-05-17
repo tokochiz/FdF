@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/05/12 19:30:53 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/17 22:25:59 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	isometric(int *x, int *y, int z, t_data *data)
 	*y = round(sin(data->view.angle_y) * (original_x + original_y) - z);
 }
 
-// set_points(t_data *data, float *x, float *y, int check)
-// {
+set_points(t_data *data, float *x, float *y, int check)
+{
 	
-// }
+}
 
-// coordinates  座標
+
 void	draw(t_data *data)
 {
 	int	x;
@@ -44,9 +44,9 @@ void	draw(t_data *data)
 		{
 			data->color = data->map.color_map[x][y];
 			if (x < data->map.width - 1)
-			// 	set_points(data, x, y, 0);
-			// if (y < data->map.height - 1)
-			// 	set_points(data, x, y, 1);
+				set_points(data, x, y, 0);
+			if (y < data->map.height - 1)
+				set_points(data, x, y, 1);
 			x++;
 		}
 		y++;
