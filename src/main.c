@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/05/08 21:32:38 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/20 21:43:31 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char *argv[])
 
  //	minilibx の初期化
 	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
+	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
 		
 	// TODO 画像を描画する　→点を結んで線を描画する
 	draw(&data);

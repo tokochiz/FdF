@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/05/08 21:43:05 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/20 21:51:52 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
+# include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include <mlx.h>
 //# include <X11/Xlib.h>
 
 # define ERR_ARGS "Invalid number of arguments\n"
@@ -41,11 +41,13 @@
 # define DEFAULT_COLOR 0xffffff
 # define TEXT_COLOR 0xeaeaea
 
-// 元の座標
+// 座標
 typedef struct s_point
 {
-	double	x;
-	double	y;
+	double	x0;
+	double	x1;
+	double	y0;
+	double	y1;
 	double	z;
 	int		shift_x;
 	int		shift_y;
@@ -118,6 +120,6 @@ void		read_map_data(char *filename, t_data *data);
 void		draw(t_data *data);
 
 // display
-void	display_info(t_data *data);
+void		display_info(t_data *data);
 
 #endif
