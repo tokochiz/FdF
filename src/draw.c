@@ -6,14 +6,14 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/05/17 22:25:59 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/20 22:03:05 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
 // TODO アイソメトリック投影の計算
-void	isometric(int *x, int *y, int z, t_data *data)
+void	calc_isometric(int *x, int *y, int z, t_data *data)
 {
 	int	original_x;
 	int	original_y;
@@ -23,10 +23,37 @@ void	isometric(int *x, int *y, int z, t_data *data)
 	*x = round(cos(data->view.angle_x) * (original_x - original_y));
 	*y = round(sin(data->view.angle_y) * (original_x + original_y) - z);
 }
-
-set_points(t_data *data, float *x, float *y, int check)
+void ajust_point(t_data *data)
 {
 	
+}
+
+void calc_line_steps(t_data *data)
+{
+	float step_x;
+	float step_y;
+	float max_v;
+	
+	
+	
+}
+
+void set_points(t_data *data, int x, int y, int direction)
+{
+	if(direction == 0)
+	{
+		data->point.x0 = x;
+		data->point.x1 = x + 1;
+		data->point.y0 = y;
+		data->point.y1 = y;
+	if(direction == 1)
+	{
+		data->point.x0 = x;
+		data->point.x1 = x;
+		data->point.y0 = y;
+		data->point.y1 = y + 1;
+	}
+	plot_line_steps(data);
 }
 
 
