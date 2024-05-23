@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/05/20 22:03:05 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/22 21:08:46 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void set_points(t_data *data, int x, int y, int direction)
 	}
 	plot_line_steps(data);
 }
-
 
 void	draw(t_data *data)
 {
