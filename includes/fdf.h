@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/05/20 21:51:52 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/28 21:59:18 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_point
 	int		shift_x;
 	int		shift_y;
 	int		p;
-
 }			t_point;
 
 // 地図情報
@@ -117,6 +116,10 @@ void		allocate_row_memory(t_data *data, int row);
 void		read_map_data(char *filename, t_data *data);
 
 // draw
+void	calc_isometric(double *x, double *y, int z, t_data *data);
+void		ajust_point(t_data *data);
+void		calc_line_steps(t_data *data);
+void		set_points(t_data *data, int x, int y, int direction);
 void		draw(t_data *data);
 
 // display

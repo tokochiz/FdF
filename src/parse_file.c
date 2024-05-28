@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:53:03 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/05/12 19:23:40 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/05/28 21:30:04 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void	read_map_data(char *filename, t_data *data)
 		free(line);
 		i++;
 	}
-	printf("err %d  tate:%d yoko:%d\n", i, data->map.width, data->map.height);
 	data->map.height_map[i] = NULL;
 }
 
