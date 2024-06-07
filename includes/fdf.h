@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/04 22:59:14 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/07 22:52:08 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void		check_file(char *filename);
 void		put_error_and_exit(const char *msg);
 void		put_invalid_file(const char *msg);
 
-// gnl_helpers
+// get_next_line_utils.c
 char		*gnl_remove_trailing_chars(int fd);
 void		reset_gnl(char *filename);
 

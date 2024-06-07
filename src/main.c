@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/04 23:13:06 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/07 22:18:27 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ int	main(int argc, char *argv[])
 	check_file(argv[1]);
 	parse_file(argv[1], &data);
 	data.point.shift_x = WIN_WIDTH / 2;
-	data.point.shift_x = WIN_HEIGHT / 2;
+	data.point.shift_y = WIN_HEIGHT / 2;
 	data.point.p = 1;
 	data.view.depth = 1;
 	data.view.angle_x = 0.523599; // 30度
 	data.view.angle_y = 0.523599; // 30度
 	if (data.map.height < 100 && data.map.width < 100)
-		data.view.zoom = 10;
+		data.view.zoom = 15;
 	else
-		data.view.zoom = 3;
+		data.view.zoom = 2;
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
 	draw(&data);

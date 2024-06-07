@@ -13,12 +13,13 @@ LIBFT_DIR = ./Libft/
 INC_DIR = includes
 SRC_DIR = src
 SRC_FILES = main.c \
-			parse_file.c \
-			get_width_height.c \
-			error.c\
 			check_file.c \
+			error.c\
+			get_width_height.c \
 			get_next_line.c \
-			gnl_helpers.c \
+			get_next_line_utils.c \
+			parse_file.c \
+			fill_map.c \
 			draw.c \
 			display_info.c
 			
