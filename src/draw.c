@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/08 19:23:33 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/08 23:24:36 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void	ajust_point(t_data *data)
 	data->point.x1 += data->point.shift_x;
 	data->point.y0 += data->point.shift_y;
 	data->point.y1 += data->point.shift_y;
- printf("Shifted: x0=%f, y0=%f, x1=%f, y1=%f\n", data->point.x0,
-		data->point.y0, data->point.x1, data->point.y1);
 }
 
 void	calc_line_steps(t_data *data)
@@ -59,26 +57,19 @@ void	calc_line_steps(t_data *data)
 	float	max_v;
 
 	ajust_point(data);
-	delta_x = data->point.x1 - data->point.x0;
-	delta_y = data->point.y1 - data->point.y0;
-	if (delta_x < 0)
-		delta_x = -delta_x;
-	if (delta_y < 0)
-		delta_y = -delta_y;
+	delta_x = fabs(data->point.x1 - data->point.x0);
+	delta_y = fabs(data->point.y1 - data->point.y0);
 	if (delta_x < delta_y)
 		max_v = delta_y;
 	else
 		max_v = delta_x;
 	step_x = (data->point.x1 - data->point.x0) / max_v;
 	step_y = (data->point.y1 - data->point.y0) / max_v;
-	printf("delta_x = %f, delta_y = %f, step_x = %f, step_y = %f\n", delta_x,
-		delta_y, step_x, step_y);
 	while ((int)(data->point.x0 - data->point.x1) || ((int)(data->point.y0
 				- data->point.y1)))
 	{
 		mlx_pixel_put(data->mlx, data->win, data->point.x0, data->point.y0,
 			data->color);
-		printf("x0 = %f, y0 = %f\n", data->point.x0, data->point.y0); // デバッグ用出力
 		data->point.x0 += step_x;
 		data->point.y0 += step_y;
 	}
@@ -102,6 +93,7 @@ void	set_points(t_data *data, int x, int y, int direction)
 	}
 	calc_line_steps(data);
 }
+
 void	draw(t_data *data)
 {
 	int	x;
@@ -114,14 +106,13 @@ void	draw(t_data *data)
 		x = 0;
 		while (x < data->map.width)
 		{
-			printf("Processing point (%d, %d)\n", x, y);
 			if (y >= 0 && y < data->map.height && x >= 0 && x < data->map.width)
 			{
 				data->color = data->map.color_map[y][x];
-			if (x < data->map.width - 1)
-				set_points(data, x, y, 0);
-			if (y < data->map.height - 1)
-				set_points(data, x, y, 1);
+				if (x < data->map.width - 1)
+					set_points(data, x, y, 0);
+				if (y < data->map.height - 1)
+					set_points(data, x, y, 1);
 			}
 			x++;
 		}
