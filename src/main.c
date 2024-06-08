@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/07 22:18:27 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/08 21:11:00 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@
 // static void destructor() {
 //     system("leaks -q fdf");
 // }
+
+void set_zoom(t_data *data)
+{
+	if(data.map.height < 100)
+	data.view.zoom = 10;
+	if (data.map.height != 0)
+	{
+		data.view.zoom = 1500.0 / data.map.height;
+		if (data.view.zoom < 1)
+			data.view.zoom = 3;
+	}
+	
+}
 
 void	check_argc(int argc)
 {
@@ -37,10 +50,7 @@ int	main(int argc, char *argv[])
 	data.view.depth = 1;
 	data.view.angle_x = 0.523599; // 30度
 	data.view.angle_y = 0.523599; // 30度
-	if (data.map.height < 100 && data.map.width < 100)
-		data.view.zoom = 15;
-	else
-		data.view.zoom = 2;
+	set_zoom();
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
 	draw(&data);

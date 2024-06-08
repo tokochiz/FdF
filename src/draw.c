@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/07 23:09:10 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/08 19:23:33 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	calc_isometric(double *x, double *y, int z, t_data *data)
 
 	original_x = *x;
 	original_y = *y;
-	*x = (original_x - original_y) * cos(data->view.angle_x);
-	*y = (original_x + original_y) * sin(data->view.angle_y) - z;
+	*x = round((original_x - original_y) * cos(data->view.angle_x));
+	*y = round((original_x + original_y) * sin(data->view.angle_y) - z);
 }
 
 void	ajust_point(t_data *data)
@@ -117,7 +117,7 @@ void	draw(t_data *data)
 			printf("Processing point (%d, %d)\n", x, y);
 			if (y >= 0 && y < data->map.height && x >= 0 && x < data->map.width)
 			{
-				data->color = data->map.color_map[x][y];
+				data->color = data->map.color_map[y][x];
 			if (x < data->map.width - 1)
 				set_points(data, x, y, 0);
 			if (y < data->map.height - 1)
