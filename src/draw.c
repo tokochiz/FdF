@@ -6,13 +6,12 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/08 23:24:36 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/09 16:48:59 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-// TODO アイソメトリック投影の計算
 void	calc_isometric(double *x, double *y, int z, t_data *data)
 {
 	double	original_x;
@@ -44,8 +43,8 @@ void	ajust_point(t_data *data)
 	}
 	data->point.x0 += data->point.shift_x;
 	data->point.x1 += data->point.shift_x;
-	data->point.y0 += data->point.shift_y;
-	data->point.y1 += data->point.shift_y;
+	data->point.y0 += data->view.offset_y;
+	data->point.y1 += data->view.offset_y;
 }
 
 void	calc_line_steps(t_data *data)
