@@ -6,17 +6,12 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/09 16:48:21 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/09 16:57:04 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include <libc.h>
-
-// __attribute__((destructor))
-// static void destructor() {
-//     system("leaks -q fdf");
-// }
 
 void	set_offset(t_data *data)
 {

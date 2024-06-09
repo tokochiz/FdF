@@ -6,13 +6,12 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 23:01:54 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/07 23:03:23 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/09 16:57:19 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-// 16進数の文字列を整数に変換する
 int	hex_str_to_int(char *hex)
 {
 	int	len;
