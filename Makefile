@@ -1,29 +1,43 @@
 NAME = fdf
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I $(INC_DIR)
-INC_DIR = includes
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+LDFLAGS = -L./libft -lft -lmlx -framework openGL -framework AppKit
 
+LIBFT = $(LIBFT_DIR)libft.a
+LIBFT_DIR = ./Libft/
+
+# MINILIBX = $(MINILIBX_DIR)libmlx.a
+# MINILIBX_DIR = ./minilibx_macos/
+# MINILIBX_HEADERS = $(MINILIBX_DIR)
+
+INC_DIR = includes
 SRC_DIR = src
 SRC_FILES = main.c \
-			parse_file.c \
-			get_w_h.c \
-			error.c\
 			check_file.c \
+			error.c\
+			get_width_height.c \
 			get_next_line.c \
+			get_next_line_utils.c \
+			parse_file.c \
+			fill_map.c \
+			draw.c \
+			display_info.c
 			
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
-
-LIBFT = libft/libft.a
-
 OBJS = $(SRCS:.c=.o)
+
+# COLORS
+GREEN = \033[0;32m
+RED = \033[0;31m
+RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME):  $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(OBJS) 
 
 $(LIBFT): 
-	make -C libft 
+	make -C $(LIBFT_DIR) 
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ 
@@ -33,7 +47,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	make -C libft fclean
+	make -C $(LIBFT_DIR)  fclean
 
 re: fclean all
 

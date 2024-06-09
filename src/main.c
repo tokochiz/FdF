@@ -6,11 +6,60 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/26 19:07:19 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/09 16:57:04 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include <libc.h>
+
+void	set_offset(t_data *data)
+{
+	data->view.offset_x = (WIN_WIDTH - (data->map.width * data->view.zoom)) / 2;
+	data->view.offset_y = (WIN_HEIGHT - (data->map.height * data->view.zoom))
+		/ 2;
+}
+
+void	set_zoom(t_data *data)
+{
+	int		max_l;
+	float	zoom_x;
+	float	zoom_y;
+
+	if (data->map.height < data->map.width)
+		max_l = data->map.width;
+	else
+		max_l = data->map.height;
+	if (max_l < 100)
+	{
+		data->view.zoom = 25;
+	}
+	else
+	{
+		zoom_x = (float)WIN_WIDTH / (float)data->map.width;
+		zoom_y = (float)WIN_HEIGHT / (float)data->map.height;
+		if (zoom_x < zoom_y)
+			data->view.zoom = zoom_x;
+		else
+			data->view.zoom = zoom_y;
+		if (data->view.zoom < 1)
+			data->view.zoom = 1;
+	}
+}
+
+void	initialize(t_data *data)
+{
+	data->point.shift_x = WIN_WIDTH / 2;
+	data->point.shift_y = WIN_HEIGHT / 2;
+	data->point.p = 1;
+	data->view.depth = 1;
+	data->view.angle_x = 0.523599;
+	data->view.angle_y = 0.523599;
+	data->view.offset_x = 0;
+	data->view.offset_y = 0;
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
+}
 
 void	check_argc(int argc)
 {
@@ -20,30 +69,16 @@ void	check_argc(int argc)
 
 int	main(int argc, char *argv[])
 {
-	t_data data;
+	t_data	data;
 
-	// char* i = argv[1];
-	// printf("%s\n", i);
-	// TODO コマンドライん引数の検証をする
 	check_argc(argc);
-
-	// TODO マップファイルの形式や内容を検証する　破損していないか、正しい形かチェック
 	check_file(argv[1]);
-
-	// // TODO マップの読み込みをして、構造体に格納する
 	parse_file(argv[1], &data);
-
-	// TODO 二次元配列に対応する行列に突っ込む　GNL, split, atoi 使う
-
-	// TODO 読み込んだ点データを等角投影に変換する　→３D空間の点が、２D表示上で表現
-
-	// TODO ライブラリの初期設定する
-
-	// TODO 画像を描画する　→点を結んで線を描画する
-
-	// TODO ユーザの入力を処理する→ズームイン、アウト
-
-	// TODO minilibXのイベントループを開始して、ウィンドウが開いている間監視してる　
-
+	initialize(&data);
+	set_zoom(&data);
+	set_offset(&data);
+	draw(&data);
+	mlx_key_hook(data.win, press, &data);
+	mlx_loop(data.mlx);
 	return (0);
 }

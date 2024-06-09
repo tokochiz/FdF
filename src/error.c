@@ -6,19 +6,19 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:51:17 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/30 18:18:28 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/09 16:49:03 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void put_error_and_exit(const char *msg)
+void	put_error_and_exit(const char *msg)
 {
 	perror(msg);
 	exit(EXIT_FAILURE);
 }
 
-void put_invalid_file(const char *msg)
+void	put_invalid_file(const char *msg)
 {
 	ft_putstr_fd(msg, STDERR_FILENO);
 	exit(EXIT_FAILURE);

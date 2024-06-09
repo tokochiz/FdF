@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 21:34:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/31 15:43:54 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/09 16:48:49 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	check_file(char *filename)
 {
 	if (check_file_extension(filename))
 		put_invalid_file("Error: Invalid file extension\n");
-	if (check_map_consistent_width(filename))
-		put_invalid_file("Error: Inconsistent map width\n");
 	if (check_map_empty(filename))
 		put_invalid_file("Error: Empty map file\n");
+	if (check_map_consistent_width(filename))
+		put_invalid_file("Error: Inconsistent map width\n");
 }
