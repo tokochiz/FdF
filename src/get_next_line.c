@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 16:45:06 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/23 18:22:58 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/09 16:47:38 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,36 +103,3 @@ char	*get_next_line(int fd)
 	free(buffer);
 	return (line);
 }
-
-// #include <libc.h>
-
-// __attribute__((destructor)) static void destructor()
-// {
-// 	system("leaks -q a.out");
-// }
-
-// int	main(void)
-// {
-// 	int fd;
-// 	char *line;
-
-// 	// テキストファイルを開く
-// 	fd = open("test.txt", O_RDONLY);
-// 	if (fd < 0)
-// 	{
-// 		perror("Failed to open file");
-// 		return (1);
-// 	}
-
-// 	// ファイルの内容を1行ずつ読み込む
-// 	while ((line = get_next_line(fd)))
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-
-// 	// ファイルを閉じる
-// 	close(fd);
-
-// 	return (0);
-// }

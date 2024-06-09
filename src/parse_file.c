@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:53:03 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/07 23:03:03 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/09 16:53:40 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	allocate_map_memory(t_data *data)
 {
 	data->map.height_map = (int **)malloc(sizeof(int *) * (data->map.height
-			+ 1));
+				+ 1));
 	data->map.color_map = (int **)malloc(sizeof(int *) * (data->map.height
-			+ 1));
+				+ 1));
 }
-// allocate 割り当てる　メモリ割り当て　
+
 void	allocate_row_memory(t_data *data, int row)
 {
 	data->map.height_map[row] = (int *)malloc(sizeof(int) * data->map.width);

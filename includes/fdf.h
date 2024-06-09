@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/07 22:52:08 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/09 16:32:11 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
-//# include <X11/Xlib.h>
 
 # define ERR_ARGS "Invalid number of arguments\n"
 # define ERR_PIPE "pipe "
@@ -37,11 +36,9 @@
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 
-// デフォルトの色を指定する
 # define DEFAULT_COLOR 0xffffff
 # define TEXT_COLOR 0xeaeaea
 
-// 座標
 typedef struct s_point
 {
 	double	x0;
@@ -54,7 +51,6 @@ typedef struct s_point
 	int		p;
 }			t_point;
 
-// 地図情報
 typedef struct s_map
 {
 	int		width;
@@ -63,13 +59,14 @@ typedef struct s_map
 	int		**color_map;
 }			t_map;
 
-// 画面に映す座標
 typedef struct s_view
 {
 	double	angle_x;
 	double	angle_y;
 	int		depth;
 	int		zoom;
+	double	offset_x;
+	double	offset_y;
 }			t_view;
 
 typedef struct s_data
@@ -104,25 +101,27 @@ int			get_width_from_line(char *line);
 int			get_width(char *filename);
 int			get_height(char *filename);
 
-//
+// fill_map
 char		**split_str_by_spaces(char *str);
-
 int			handle_invalid_file(char *filename);
 int			hex_str_to_int(char *hex);
 void		fill_map(int i, char *line, t_data *data);
-void		parse_file(char *filename, t_data *data);
+
+// parse_file
 void		allocate_map_memory(t_data *data);
 void		allocate_row_memory(t_data *data, int row);
 void		read_map_data(char *filename, t_data *data);
+void		parse_file(char *filename, t_data *data);
 
 // draw
-void	calc_isometric(double *x, double *y, int z, t_data *data);
+void		calc_isometric(double *x, double *y, int z, t_data *data);
 void		ajust_point(t_data *data);
 void		calc_line_steps(t_data *data);
 void		set_points(t_data *data, int x, int y, int direction);
 void		draw(t_data *data);
 
-// display
+// mlx_utils
 void		display_info(t_data *data);
+int			press(int key, t_data *data);
 
 #endif

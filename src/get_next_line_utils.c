@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl_helpers.c                                      :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:49:45 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/03/31 17:43:09 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/09 16:49:09 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	*gnl_remove_trailing_chars(int fd)
 
 void	reset_gnl(char *filename)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
