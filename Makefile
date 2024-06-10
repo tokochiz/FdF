@@ -1,6 +1,6 @@
 NAME = fdf
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g 
 LDFLAGS = -L./libft -lft -lmlx -framework openGL -framework AppKit
 
 LIBFT = $(LIBFT_DIR)libft.a
@@ -21,7 +21,8 @@ SRC_FILES = main.c \
 			parse_file.c \
 			fill_map.c \
 			draw.c \
-			display_info.c
+			key_handler.c \
+			set_scale.c
 			
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(SRCS:.c=.o)

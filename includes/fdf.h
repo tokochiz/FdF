@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/09 16:32:11 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/10 20:55:01 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@
 # define DEFAULT_COLOR 0xffffff
 # define TEXT_COLOR 0xeaeaea
 
+# define HORIZONTAL 0
+# define VERTICAL 1
+
+# define ESC_KEY 53
+# define DESTROY_NOTIFY 17
+
 typedef struct s_point
 {
 	double	x0;
@@ -46,8 +52,8 @@ typedef struct s_point
 	double	y0;
 	double	y1;
 	double	z;
-	int		shift_x;
-	int		shift_y;
+	int		center_x;
+	int		center_y;
 	int		p;
 }			t_point;
 
@@ -64,7 +70,7 @@ typedef struct s_view
 	double	angle_x;
 	double	angle_y;
 	int		depth;
-	int		zoom;
+	int		scale;
 	double	offset_x;
 	double	offset_y;
 }			t_view;
@@ -120,8 +126,16 @@ void		calc_line_steps(t_data *data);
 void		set_points(t_data *data, int x, int y, int direction);
 void		draw(t_data *data);
 
-// mlx_utils
+// key_handler
+int	close_window(void *param);
 void		display_info(t_data *data);
 int			press(int key, t_data *data);
+
+// set_scale
+double		calc_scale(double max_dist, t_data *data);
+double		euclidean_distance(double x1, double y1, double x2, double y2);
+double		calc_max_distance(double iso_x, double iso_y, double current_max,
+				t_data *data);
+void		set_scale(t_data *data);
 
 #endif

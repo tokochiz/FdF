@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/09 16:57:04 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/10 20:47:33 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,15 @@
 
 void	set_offset(t_data *data)
 {
-	data->view.offset_x = (WIN_WIDTH - (data->map.width * data->view.zoom)) / 2;
-	data->view.offset_y = (WIN_HEIGHT - (data->map.height * data->view.zoom))
+	data->view.offset_x = (WIN_WIDTH - (data->map.width * data->view.scale)) / 2;
+	data->view.offset_y = (WIN_HEIGHT - (data->map.height * data->view.scale))
 		/ 2;
-}
-
-void	set_zoom(t_data *data)
-{
-	int		max_l;
-	float	zoom_x;
-	float	zoom_y;
-
-	if (data->map.height < data->map.width)
-		max_l = data->map.width;
-	else
-		max_l = data->map.height;
-	if (max_l < 100)
-	{
-		data->view.zoom = 25;
-	}
-	else
-	{
-		zoom_x = (float)WIN_WIDTH / (float)data->map.width;
-		zoom_y = (float)WIN_HEIGHT / (float)data->map.height;
-		if (zoom_x < zoom_y)
-			data->view.zoom = zoom_x;
-		else
-			data->view.zoom = zoom_y;
-		if (data->view.zoom < 1)
-			data->view.zoom = 1;
-	}
 }
 
 void	initialize(t_data *data)
 {
-	data->point.shift_x = WIN_WIDTH / 2;
-	data->point.shift_y = WIN_HEIGHT / 2;
+	data->point.center_x = WIN_WIDTH / 2;
+	data->point.center_y = WIN_HEIGHT / 2;
 	data->point.p = 1;
 	data->view.depth = 1;
 	data->view.angle_x = 0.523599;
@@ -75,10 +48,11 @@ int	main(int argc, char *argv[])
 	check_file(argv[1]);
 	parse_file(argv[1], &data);
 	initialize(&data);
-	set_zoom(&data);
+	set_scale(&data);
 	set_offset(&data);
 	draw(&data);
 	mlx_key_hook(data.win, press, &data);
+	mlx_hook(data.win, DESTROY_NOTIFY, 1L << 17, close_window, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }
