@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 19:49:42 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/10 22:05:42 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/10 22:08:29 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ double	calc_scale(double max_dist)
 	double	scale_y;
 	double	scale;
 
-	scale_x = WIN_WIDTH / (2 * max_dist);
-	scale_y = WIN_HEIGHT / (2 * max_dist);
+	scale_x = WIN_WIDTH / (max_dist);
+	scale_y = WIN_HEIGHT / (max_dist);
 	if (scale_x < scale_y)
 		scale = scale_x;
 	else
