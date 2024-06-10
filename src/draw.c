@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/10 20:28:01 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/10 21:58:22 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ajust_point(t_data *data)
 		* data->view.depth;
 	calc_isometric(&data->point.x0, &data->point.y0, z0, data);
 	calc_isometric(&data->point.x1, &data->point.y1, z1, data);
+	//set_scale(data);
 	data->point.x0 *= data->view.scale;
 	data->point.y0 *= data->view.scale;
 	data->point.x1 *= data->view.scale;

@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/10 20:55:01 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/10 22:03:45 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void		display_info(t_data *data);
 int			press(int key, t_data *data);
 
 // set_scale
-double		calc_scale(double max_dist, t_data *data);
+double		calc_scale(double max_dist);
 double		euclidean_distance(double x1, double y1, double x2, double y2);
 double		calc_max_distance(double iso_x, double iso_y, double current_max,
 				t_data *data);

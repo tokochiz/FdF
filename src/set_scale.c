@@ -6,21 +6,20 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 19:49:42 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/10 20:55:27 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/10 22:05:42 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-double	calc_scale(double max_dist, t_data *data)
+double	calc_scale(double max_dist)
 {
 	double	scale_x;
 	double	scale_y;
 	double	scale;
 
-	scale = 1;
-	scale_x = data->point.center_x / (2 * max_dist);
-	scale_y = data->point.center_y / (2 * max_dist);
+	scale_x = WIN_WIDTH / (2 * max_dist);
+	scale_y = WIN_HEIGHT / (2 * max_dist);
 	if (scale_x < scale_y)
 		scale = scale_x;
 	else
@@ -63,7 +62,7 @@ void	set_scale(t_data *data)
 		while (x < data->map.width)
 		{
 			iso_x = x;
-			iso_x = y;
+			iso_y = y;
 			calc_isometric(&iso_x, &iso_y, data->map.height_map[y][x]
 				* data->view.depth, data);
 			max_dist = calc_max_distance(iso_x, iso_y, max_dist, data);
@@ -71,5 +70,5 @@ void	set_scale(t_data *data)
 		}
 		y++;
 	}
-	data->view.scale = calc_scale(max_dist, data);
+	data->view.scale = calc_scale(max_dist);
 }

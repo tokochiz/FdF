@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/10 20:47:33 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/10 22:01:15 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	initialize(t_data *data)
 	data->view.angle_y = 0.523599;
 	data->view.offset_x = 0;
 	data->view.offset_y = 0;
+	data->view.scale = 30;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
 }
