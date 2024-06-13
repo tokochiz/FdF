@@ -6,20 +6,22 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 19:49:42 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/13 21:48:25 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/13 22:56:45 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-double	calc_scale(double min_x, double max_x, double min_y, double max_y)
+double	calc_scale(t_data *data)
 {
 	double	scale_x;
 	double	scale_y;
 	double	scale;
+	double	margin;
 
-	scale_x = WIN_WIDTH / (max_x - min_x);
-	scale_y = WIN_HEIGHT / (max_y - min_y);
+	margin = 0.7;
+	scale_x = WIN_WIDTH * margin / (data->map.max_x - data->map.min_x);
+	scale_y = WIN_HEIGHT * margin / (data->map.max_y - data->map.min_y);
 	if (scale_x < scale_y)
 		scale = scale_x;
 	else
@@ -27,18 +29,29 @@ double	calc_scale(double min_x, double max_x, double min_y, double max_y)
 	return (scale);
 }
 
-void	find_min_max_iso(t_data *data, double *min_x, double *max_x,
-		double *min_y, double *max_y)
+void	update_min_max(double iso_x, double iso_y, t_data *data)
+{
+	if (iso_x < data->map.min_x)
+		data->map.min_x = iso_x;
+	if (iso_x > data->map.max_x)
+		data->map.max_x = iso_x;
+	if (iso_y < data->map.min_y)
+		data->map.min_y = iso_y;
+	if (iso_y > data->map.max_y)
+		data->map.max_y = iso_y;
+}
+
+void	find_min_max_iso(t_data *data)
 {
 	int		y;
 	int		x;
 	double	iso_x;
 	double	iso_y;
 
-	*min_x = 0;
-	*max_x = 0;
-	*min_y = 0;
-	*max_y = 0;
+	data->map.min_x = 0;
+	data->map.max_x = 0;
+	data->map.min_y = 0;
+	data->map.max_y = 0;
 	y = 0;
 	while (y < data->map.height)
 	{
@@ -49,14 +62,7 @@ void	find_min_max_iso(t_data *data, double *min_x, double *max_x,
 			iso_y = y;
 			calc_isometric(&iso_x, &iso_y, data->map.height_map[y][x]
 				* data->view.depth, data);
-			if (iso_x < *min_x)
-				*min_x = iso_x;
-			if (iso_x > *max_x)
-				*max_x = iso_x;
-			if (iso_y < *min_y)
-				*min_y = iso_y;
-			if (iso_y < *max_y)
-				*max_y = iso_y;
+			update_min_max(iso_x, iso_y, data);
 			x++;
 		}
 		y++;
@@ -65,14 +71,10 @@ void	find_min_max_iso(t_data *data, double *min_x, double *max_x,
 
 void	set_scale(t_data *data)
 {
-	double	min_x;
-	double	max_x;
-	double	min_y;
-	double	max_y;
 	double	scale;
 
-	find_min_max_iso(data, &min_x, &max_x, &min_y, &max_y);
-	scale = calc_scale(min_x, max_x, min_y, max_y);
+	find_min_max_iso(data);
+	scale = calc_scale(data);
 	if (scale < 1)
 		scale = 1;
 	data->view.scale = scale;

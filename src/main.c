@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/13 21:44:11 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/13 23:17:04 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,6 @@ void	set_offset(t_data *data)
 		/ 2;
 }
 
-// void	set_scale(t_data *data)
-// {
-// 	int		max_l;
-// 	float	scale_x;
-// 	float	scale_y;
-
-// 	if (data->map.height < data->map.width)
-// 		max_l = data->map.width;
-// 	else
-// 		max_l = data->map.height;
-// 	if (max_l < 100)
-// 	{
-// 		data->view.scale = 25;
-// 	}
-// 	else
-// 	{
-// 		scale_x = (float)WIN_WIDTH / (float)data->map.width;
-// 		scale_y = (float)WIN_HEIGHT / (float)data->map.height;
-// 		if (scale_x < scale_y)
-// 			data->view.scale = scale_x;
-// 		else
-// 			data->view.scale = scale_y;
-// 		if (data->view.scale < 1)
-// 			data->view.scale = 1;
-// 	}
-// }
-
 void	initialize(t_data *data)
 {
 	data->point.center_x = WIN_WIDTH / 2;
@@ -58,9 +31,9 @@ void	initialize(t_data *data)
 	data->view.angle_y = ANGLE_30;
 	data->view.offset_x = 0;
 	data->view.offset_y = 0;
-	data->view.scale = 20;
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
+	data->view.scale = 1;
+	data->mlx.mlx = mlx_init();
+	data->mlx.win = mlx_new_window(data->mlx.mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
 }
 
 void	check_argc(int argc)
@@ -77,11 +50,12 @@ int	main(int argc, char *argv[])
 	check_file(argv[1]);
 	parse_file(argv[1], &data);
 	initialize(&data);
+	init_image(&data);
 	set_scale(&data);
 	set_offset(&data);
 	draw(&data);
-	mlx_key_hook(data.win, press, &data);
-	mlx_hook(data.win, DESTROY_NOTIFY, 1L << 17, close_window, &data);
-	mlx_loop(data.mlx);
+	mlx_key_hook(data.mlx.win, press, &data);
+	mlx_hook(data.mlx.win, DESTROY_NOTIFY, 1L << 17, close_window, &data);
+	mlx_loop(data.mlx.mlx);
 	return (0);
 }

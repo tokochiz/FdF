@@ -18,7 +18,8 @@ SRC_FILES = main.c \
 			fill_map.c \
 			draw.c \
 			key_handler.c \
-			set_scale.c
+			set_scale.c \
+			put_img.c
 			
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(SRCS:.c=.o)

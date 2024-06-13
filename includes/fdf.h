@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/13 21:47:35 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/13 23:19:03 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ typedef struct s_map
 {
 	int		width;
 	int		height;
+	double	min_x;
+	double	max_x;
+	double	min_y;
+	double	max_y;
 	int		**height_map;
 	int		**color_map;
 }			t_map;
@@ -73,11 +77,20 @@ typedef struct s_view
 	double	offset_y;
 }			t_view;
 
-typedef struct s_data
+typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
 	void	*img;
+	void	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_mlx;
+
+typedef struct s_data
+{
+	t_mlx	mlx;
 	int		color;
 	t_point	point;
 	t_map	map;
@@ -130,9 +143,12 @@ void		display_info(t_data *data);
 int			press(int key, t_data *data);
 
 // set_scale
-double	calc_scale(double min_x, double max_x, double min_y, double max_y);
-void		find_min_max_iso(t_data *data, double *min_x, double *max_x,
-				double *min_y, double *max_y);
+double		calc_scale(t_data *data);
+void		update_min_max(double iso_x, double iso_y, t_data *data);
+void		find_min_max_iso(t_data *data);
 void		set_scale(t_data *data);
 
+// put_img
+void	init_image(t_data *data);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 #endif

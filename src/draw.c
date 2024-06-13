@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/13 20:46:39 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/13 23:15:26 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ void	calc_line_steps(t_data *data)
 	while ((int)(data->point.x0 - data->point.x1) || ((int)(data->point.y0
 				- data->point.y1)))
 	{
-		mlx_pixel_put(data->mlx, data->win, data->point.x0, data->point.y0,
-			data->color);
+		my_mlx_pixel_put(data, data->point.x0, data->point.y0, data->color);
 		data->point.x0 += step_x;
 		data->point.y0 += step_y;
 	}
@@ -114,4 +113,5 @@ void	draw(t_data *data)
 		}
 		y++;
 	}
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
 }
