@@ -6,10 +6,6 @@ LDFLAGS = -L./libft -lft -lmlx -framework openGL -framework AppKit
 LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = ./Libft/
 
-# MINILIBX = $(MINILIBX_DIR)libmlx.a
-# MINILIBX_DIR = ./minilibx_macos/
-# MINILIBX_HEADERS = $(MINILIBX_DIR)
-
 INC_DIR = includes
 SRC_DIR = src
 SRC_FILES = main.c \

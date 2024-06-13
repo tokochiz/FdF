@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/10 22:03:45 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/13 21:47:35 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,13 @@
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
-
 # define DEFAULT_COLOR 0xffffff
 # define TEXT_COLOR 0xeaeaea
-
 # define HORIZONTAL 0
 # define VERTICAL 1
-
 # define ESC_KEY 53
 # define DESTROY_NOTIFY 17
+# define ANGLE_30 0.523599
 
 typedef struct s_point
 {
@@ -70,7 +68,7 @@ typedef struct s_view
 	double	angle_x;
 	double	angle_y;
 	int		depth;
-	int		scale;
+	double	scale;
 	double	offset_x;
 	double	offset_y;
 }			t_view;
@@ -127,15 +125,14 @@ void		set_points(t_data *data, int x, int y, int direction);
 void		draw(t_data *data);
 
 // key_handler
-int	close_window(void *param);
+int			close_window(void *param);
 void		display_info(t_data *data);
 int			press(int key, t_data *data);
 
 // set_scale
-double		calc_scale(double max_dist);
-double		euclidean_distance(double x1, double y1, double x2, double y2);
-double		calc_max_distance(double iso_x, double iso_y, double current_max,
-				t_data *data);
+double	calc_scale(double min_x, double max_x, double min_y, double max_y);
+void		find_min_max_iso(t_data *data, double *min_x, double *max_x,
+				double *min_y, double *max_y);
 void		set_scale(t_data *data);
 
 #endif

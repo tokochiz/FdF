@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/13 20:15:19 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/13 20:46:39 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,17 @@ void	ajust_point(t_data *data)
 	int	z1;
 
 	z0 = data->map.height_map[(int)data->point.y0][(int)data->point.x0]
-		* data->view.depth*data->view.scale;
+		* data->view.depth * data->view.scale;
 	z1 = data->map.height_map[(int)data->point.y1][(int)data->point.x1]
-		* data->view.depth*data->view.scale;
-
+		* data->view.depth * data->view.scale;
 	data->point.x0 *= data->view.scale;
 	data->point.x1 *= data->view.scale;
 	data->point.y0 *= data->view.scale;
 	data->point.y1 *= data->view.scale;
 	calc_isometric(&data->point.x0, &data->point.y0, z0, data);
 	calc_isometric(&data->point.x1, &data->point.y1, z1, data);
-	
-
 	data->point.x0 += data->point.center_x;
 	data->point.x1 += data->point.center_x;
-	// data->point.x0 += data->view.offset_x;
-	// data->point.x1 += data->view.offset_x;
 	data->point.y0 += data->view.offset_y;
 	data->point.y1 += data->view.offset_y;
 }
@@ -78,14 +73,14 @@ void	calc_line_steps(t_data *data)
 
 void	set_points(t_data *data, int x, int y, int direction)
 {
-	if (direction == 0)
+	if (direction == HORIZONTAL)
 	{
 		data->point.x0 = x;
 		data->point.x1 = x + 1;
 		data->point.y0 = y;
 		data->point.y1 = y;
 	}
-	if (direction == 1)
+	if (direction == VERTICAL)
 	{
 		data->point.x0 = x;
 		data->point.x1 = x;
@@ -111,9 +106,9 @@ void	draw(t_data *data)
 			{
 				data->color = data->map.color_map[y][x];
 				if (x < data->map.width - 1)
-					set_points(data, x, y, 0);
+					set_points(data, x, y, HORIZONTAL);
 				if (y < data->map.height - 1)
-					set_points(data, x, y, 1);
+					set_points(data, x, y, VERTICAL);
 			}
 			x++;
 		}
