@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_handler.c                                      :+:      :+:    :+:   */
+/*   display_info.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 21:15:58 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/10 20:54:46 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/09 16:48:52 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-int	close_window(void *param)
-{
-	(void)param;
-	exit(0);
-	return (0);
-}
 
 void	display_info(t_data *data)
 {
@@ -35,7 +28,7 @@ void	display_info(t_data *data)
 int	press(int key, t_data *data)
 {
 	mlx_clear_window(data->mlx, data->win);
-	if (key == ESC_KEY)
+	if (key == 53)
 		exit(0);
 	draw(data);
 	return (0);
