@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/13 23:19:03 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/14 19:14:20 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ void		draw(t_data *data);
 
 // key_handler
 int			close_window(void *param);
-void		display_info(t_data *data);
 int			press(int key, t_data *data);
 
 // set_scale
@@ -149,6 +148,8 @@ void		find_min_max_iso(t_data *data);
 void		set_scale(t_data *data);
 
 // put_img
+void	display_info(t_data *data);
 void	init_image(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
 #endif

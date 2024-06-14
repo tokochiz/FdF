@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 19:49:42 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/13 22:56:45 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/14 19:19:19 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ double	calc_scale(t_data *data)
 	double	scale;
 	double	margin;
 
-	margin = 0.7;
+	margin = 0.6;
 	scale_x = WIN_WIDTH * margin / (data->map.max_x - data->map.min_x);
 	scale_y = WIN_HEIGHT * margin / (data->map.max_y - data->map.min_y);
 	if (scale_x < scale_y)

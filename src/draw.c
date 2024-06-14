@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/13 23:15:26 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/14 19:21:18 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	draw(t_data *data)
 	int	y;
 
 	y = 0;
-	display_info(data);
+
 	while (y < data->map.height)
 	{
 		x = 0;
@@ -114,4 +114,5 @@ void	draw(t_data *data)
 		y++;
 	}
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
+	display_info(data);
 }

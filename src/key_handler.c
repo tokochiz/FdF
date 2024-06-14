@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 21:15:58 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/13 23:16:10 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/14 19:17:36 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,6 @@ int	close_window(void *param)
 	(void)param;
 	exit(0);
 	return (0);
-}
-
-void	display_info(t_data *data)
-{
-	int		y;
-	void	*mlx;
-	void	*win;
-
-	y = 0;
-	mlx = data->mlx.mlx;
-	win = data->mlx.win;
-	mlx_string_put(mlx, win, 50, y += 10, TEXT_COLOR, "*** key ***");
-	mlx_string_put(mlx, win, 50, y += 20, TEXT_COLOR, "esc: Quit");
 }
 
 int	press(int key, t_data *data)
