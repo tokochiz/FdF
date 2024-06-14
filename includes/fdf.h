@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/14 19:14:20 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/14 19:35:38 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
-# define DEFAULT_COLOR 0xffffff
+# define DEFAULT_COLOR 0x7cfc00
 # define TEXT_COLOR 0xeaeaea
 # define HORIZONTAL 0
 # define VERTICAL 1
