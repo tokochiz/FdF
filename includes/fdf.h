@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/14 19:35:38 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/14 22:28:23 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 # define ERR_EXECVE "execve "
 # define ERR_MALLOC "malloc "
 # define ERR_OPEN "open "
-# define ERR_CMD "Error : Command not found\n"
-# define ERR_DIR "Error : No such file of directory\n"
-# define ERR_FILE "Error : invalid file\n"
+# define ERR_CMD " command not found\n"
+# define ERR_DIR " No such file of directory\n"
+# define ERR_FILE " invalid file\n"
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
@@ -125,6 +125,7 @@ int			hex_str_to_int(char *hex);
 void		fill_map(int i, char *line, t_data *data);
 
 // parse_file
+void		free_2d_memory(int **array, int height);
 void		allocate_map_memory(t_data *data);
 void		allocate_row_memory(t_data *data, int row);
 void		read_map_data(char *filename, t_data *data);
@@ -148,8 +149,8 @@ void		find_min_max_iso(t_data *data);
 void		set_scale(t_data *data);
 
 // put_img
-void	display_info(t_data *data);
-void	init_image(t_data *data);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		display_info(t_data *data);
+void		init_image(t_data *data);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

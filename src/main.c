@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/14 19:32:58 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/14 22:15:38 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	initialize(t_data *data)
 	data->view.offset_y = 0;
 	data->view.scale = 1;
 	data->mlx.mlx = mlx_init();
-	data->mlx.win = mlx_new_window(data->mlx.mlx, WIN_WIDTH, WIN_HEIGHT, "**** FdF ****");
+	data->mlx.win = mlx_new_window(data->mlx.mlx, WIN_WIDTH, WIN_HEIGHT, 
+		"**** FdF ****");
 }
 
 void	check_argc(int argc)
@@ -57,5 +58,6 @@ int	main(int argc, char *argv[])
 	mlx_key_hook(data.mlx.win, press, &data);
 	mlx_hook(data.mlx.win, DESTROY_NOTIFY, 1L << 17, close_window, &data);
 	mlx_loop(data.mlx.mlx);
+	
 	return (0);
 }
