@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:58:00 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/14 19:21:18 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/15 15:46:31 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	ajust_point(t_data *data)
 	data->point.y1 *= data->view.scale;
 	calc_isometric(&data->point.x0, &data->point.y0, z0, data);
 	calc_isometric(&data->point.x1, &data->point.y1, z1, data);
-	data->point.x0 += data->point.center_x;
-	data->point.x1 += data->point.center_x;
+	data->point.x0 += data->view.offset_x;
+	data->point.x1 += data->view.offset_x;
 	data->point.y0 += data->view.offset_y;
 	data->point.y1 += data->view.offset_y;
 }
@@ -64,7 +64,8 @@ void	calc_line_steps(t_data *data)
 	while ((int)(data->point.x0 - data->point.x1) || ((int)(data->point.y0
 				- data->point.y1)))
 	{
-		my_mlx_pixel_put(data, data->point.x0, data->point.y0, data->color);
+		my_mlx_pixel_put(data, data->point.x0, data->point.y0,
+			data->point.color);
 		data->point.x0 += step_x;
 		data->point.y0 += step_y;
 	}
@@ -95,7 +96,6 @@ void	draw(t_data *data)
 	int	y;
 
 	y = 0;
-
 	while (y < data->map.height)
 	{
 		x = 0;
@@ -103,7 +103,7 @@ void	draw(t_data *data)
 		{
 			if (y >= 0 && y < data->map.height && x >= 0 && x < data->map.width)
 			{
-				data->color = data->map.color_map[y][x];
+				data->point.color = data->map.color_map[y][x];
 				if (x < data->map.width - 1)
 					set_points(data, x, y, HORIZONTAL);
 				if (y < data->map.height - 1)
@@ -113,6 +113,7 @@ void	draw(t_data *data)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win,
+		data->mlx.img, 0, 0);
 	display_info(data);
 }

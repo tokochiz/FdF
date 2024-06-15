@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/15 14:27:03 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/15 15:44:52 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_point
 	double	y0;
 	double	y1;
 	double	z;
+	int		color;
 	int		center_x;
 	int		center_y;
 	int		p;
@@ -91,7 +92,6 @@ typedef struct s_mlx
 typedef struct s_data
 {
 	t_mlx	mlx;
-	int		color;
 	t_point	point;
 	t_map	map;
 	t_view	view;

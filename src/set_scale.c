@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 19:49:42 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/14 21:10:23 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/15 15:01:05 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,4 @@ void	set_scale(t_data *data)
 	if (scale < 1)
 		scale = 1;
 	data->view.scale = scale;
-	printf("Calculated scale: %f\n", data->view.scale);
 }
