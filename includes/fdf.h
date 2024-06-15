@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/15 15:59:02 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/15 16:14:21 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,12 @@ void		check_file(char *filename);
 void		put_error_and_exit(const char *msg);
 void		put_invalid_file(const char *msg);
 
-// get_next_line_utils.c
+// get_next_line_utils
 void		free_2d_memory(int **array, int height);
 char		*gnl_remove_trailing_chars(int fd);
 void		reset_gnl(char *filename);
 
-// get_width & height
+// get_width_height
 int			get_width_from_line(char *line);
 int			get_width(char *filename);
 int			get_height(char *filename);
