@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/15 15:44:52 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/15 15:59:02 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_point
 	int		color;
 	int		center_x;
 	int		center_y;
-	int		p;
 }			t_point;
 
 typedef struct s_map

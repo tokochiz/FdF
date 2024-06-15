@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/15 15:41:56 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/15 15:59:11 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	initialize(t_data *data)
 {
 	data->point.center_x = WIN_WIDTH / 2;
 	data->point.center_y = WIN_HEIGHT / 2;
-	data->point.p = 1;
 	data->view.depth = 1;
 	data->view.angle_x = ANGLE_30;
 	data->view.angle_y = ANGLE_30;
