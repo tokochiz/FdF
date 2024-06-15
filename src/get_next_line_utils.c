@@ -6,11 +6,27 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:49:45 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/09 16:49:09 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/15 15:45:32 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+void	free_2d_memory(int **array, int height)
+{
+	int	i;
+
+	if (array == NULL)
+		return ;
+	i = 0;
+	while (i < height)
+	{
+		if (array[i] != NULL)
+			free(array[i]);
+		i++;
+	}
+	free(array);
+}
 
 char	*gnl_remove_trailing_chars(int fd)
 {

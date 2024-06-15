@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:54:09 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/09 16:57:04 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/15 15:59:11 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,50 +15,28 @@
 
 void	set_offset(t_data *data)
 {
-	data->view.offset_x = (WIN_WIDTH - (data->map.width * data->view.zoom)) / 2;
-	data->view.offset_y = (WIN_HEIGHT - (data->map.height * data->view.zoom))
-		/ 2;
-}
+	double	map_width;
+	double	map_height;
 
-void	set_zoom(t_data *data)
-{
-	int		max_l;
-	float	zoom_x;
-	float	zoom_y;
-
-	if (data->map.height < data->map.width)
-		max_l = data->map.width;
-	else
-		max_l = data->map.height;
-	if (max_l < 100)
-	{
-		data->view.zoom = 25;
-	}
-	else
-	{
-		zoom_x = (float)WIN_WIDTH / (float)data->map.width;
-		zoom_y = (float)WIN_HEIGHT / (float)data->map.height;
-		if (zoom_x < zoom_y)
-			data->view.zoom = zoom_x;
-		else
-			data->view.zoom = zoom_y;
-		if (data->view.zoom < 1)
-			data->view.zoom = 1;
-	}
+	find_min_max_iso(data);
+	map_width = (data->map.max_x - data->map.min_x) * data->view.scale;
+	map_height = (data->map.max_y - data->map.min_y) * data->view.scale;
+	data->view.offset_x = (((WIN_WIDTH - map_width) / 2)
+			- (data->map.min_x * data->view.scale));
+	data->view.offset_y = (((WIN_HEIGHT - map_height) / 2)
+			- (data->map.min_y * data->view.scale));
 }
 
 void	initialize(t_data *data)
 {
-	data->point.shift_x = WIN_WIDTH / 2;
-	data->point.shift_y = WIN_HEIGHT / 2;
-	data->point.p = 1;
+	data->point.center_x = WIN_WIDTH / 2;
+	data->point.center_y = WIN_HEIGHT / 2;
 	data->view.depth = 1;
-	data->view.angle_x = 0.523599;
-	data->view.angle_y = 0.523599;
+	data->view.angle_x = ANGLE_30;
+	data->view.angle_y = ANGLE_30;
 	data->view.offset_x = 0;
 	data->view.offset_y = 0;
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "FdF");
+	data->view.scale = 1;
 }
 
 void	check_argc(int argc)
@@ -73,12 +51,14 @@ int	main(int argc, char *argv[])
 
 	check_argc(argc);
 	check_file(argv[1]);
-	parse_file(argv[1], &data);
 	initialize(&data);
-	set_zoom(&data);
+	init_image(&data);
+	parse_file(argv[1], &data);
+	set_scale(&data);
 	set_offset(&data);
 	draw(&data);
-	mlx_key_hook(data.win, press, &data);
-	mlx_loop(data.mlx);
+	mlx_key_hook(data.mlx.win, press, &data);
+	mlx_hook(data.mlx.win, DESTROY_NOTIFY, 1L << 17, close_window, &data);
+	mlx_loop(data.mlx.mlx);
 	return (0);
 }

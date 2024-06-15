@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 16:05:22 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/06/09 16:32:11 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/06/15 16:14:21 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,23 @@
 # include <unistd.h>
 
 # define ERR_ARGS "Invalid number of arguments\n"
-# define ERR_PIPE "pipe "
-# define ERR_EXECVE "execve "
-# define ERR_MALLOC "malloc "
-# define ERR_OPEN "open "
-# define ERR_CMD "Error : Command not found\n"
-# define ERR_DIR "Error : No such file of directory\n"
-# define ERR_FILE "Error : invalid file\n"
+# define ERR_PIPE "Error pipe "
+# define ERR_EXECVE "Error execve "
+# define ERR_MALLOC "Error malloc "
+# define ERR_OPEN "Error open "
+# define ERR_CMD " command not found\n"
+# define ERR_DIR " No such file of directory\n"
+# define ERR_FILE "Error invalid file \n"
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
-
-# define DEFAULT_COLOR 0xffffff
+# define DEFAULT_COLOR 0x7cfc00
 # define TEXT_COLOR 0xeaeaea
+# define HORIZONTAL 0
+# define VERTICAL 1
+# define ESC_KEY 53
+# define DESTROY_NOTIFY 17
+# define ANGLE_30 0.523599
 
 typedef struct s_point
 {
@@ -46,15 +50,19 @@ typedef struct s_point
 	double	y0;
 	double	y1;
 	double	z;
-	int		shift_x;
-	int		shift_y;
-	int		p;
+	int		color;
+	int		center_x;
+	int		center_y;
 }			t_point;
 
 typedef struct s_map
 {
 	int		width;
 	int		height;
+	double	min_x;
+	double	max_x;
+	double	min_y;
+	double	max_y;
 	int		**height_map;
 	int		**color_map;
 }			t_map;
@@ -64,17 +72,25 @@ typedef struct s_view
 	double	angle_x;
 	double	angle_y;
 	int		depth;
-	int		zoom;
+	double	scale;
 	double	offset_x;
 	double	offset_y;
 }			t_view;
 
-typedef struct s_data
+typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
 	void	*img;
-	int		color;
+	void	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_mlx;
+
+typedef struct s_data
+{
+	t_mlx	mlx;
 	t_point	point;
 	t_map	map;
 	t_view	view;
@@ -92,11 +108,12 @@ void		check_file(char *filename);
 void		put_error_and_exit(const char *msg);
 void		put_invalid_file(const char *msg);
 
-// get_next_line_utils.c
+// get_next_line_utils
+void		free_2d_memory(int **array, int height);
 char		*gnl_remove_trailing_chars(int fd);
 void		reset_gnl(char *filename);
 
-// get_width & height
+// get_width_height
 int			get_width_from_line(char *line);
 int			get_width(char *filename);
 int			get_height(char *filename);
@@ -108,9 +125,10 @@ int			hex_str_to_int(char *hex);
 void		fill_map(int i, char *line, t_data *data);
 
 // parse_file
+void		handle_read_error(t_data *data, int row, const char *error_message);
 void		allocate_map_memory(t_data *data);
 void		allocate_row_memory(t_data *data, int row);
-void		read_map_data(char *filename, t_data *data);
+void		read_map_from_file(char *filename, t_data *data);
 void		parse_file(char *filename, t_data *data);
 
 // draw
@@ -120,8 +138,19 @@ void		calc_line_steps(t_data *data);
 void		set_points(t_data *data, int x, int y, int direction);
 void		draw(t_data *data);
 
-// mlx_utils
-void		display_info(t_data *data);
+// key_handler
+int			close_window(void *param);
 int			press(int key, t_data *data);
+
+// set_scale
+double		calc_scale(t_data *data);
+void		update_min_max(double iso_x, double iso_y, t_data *data);
+void		find_min_max_iso(t_data *data);
+void		set_scale(t_data *data);
+
+// put_img
+void		display_info(t_data *data);
+void		init_image(t_data *data);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

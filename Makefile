@@ -1,14 +1,10 @@
 NAME = fdf
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -L./libft -lft -lmlx -framework openGL -framework AppKit
 
 LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_DIR = ./Libft/
-
-# MINILIBX = $(MINILIBX_DIR)libmlx.a
-# MINILIBX_DIR = ./minilibx_macos/
-# MINILIBX_HEADERS = $(MINILIBX_DIR)
 
 INC_DIR = includes
 SRC_DIR = src
@@ -21,7 +17,9 @@ SRC_FILES = main.c \
 			parse_file.c \
 			fill_map.c \
 			draw.c \
-			display_info.c
+			key_handler.c \
+			set_scale.c \
+			put_img.c
 			
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(SRCS:.c=.o)
