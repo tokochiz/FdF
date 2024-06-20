@@ -74,5 +74,3 @@ ESCキーでウィンドウを閉じ、プログラムを終了します。
 小さなグラフィックライブラリで、X-WindowやCocoaを使用して簡単にウィンドウを作成できます。
 ### Libft:
 42プロジェクトで作成した標準Cライブラリ関数の再実装関数たち。
-
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/77ZiFkl"  ><a href="//imgur.com/a/77ZiFkl">t2.fdf</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
